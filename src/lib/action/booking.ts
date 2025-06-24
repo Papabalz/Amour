@@ -8,6 +8,7 @@ interface BookingData {
     arriveDate: string;
     departDate: string;
     guests: number;
+    pickup_location: string; // Add all other required fields here
     // Add other required fields according to your booking schema
     [key: string]: any;
 }
