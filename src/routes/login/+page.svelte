@@ -5,13 +5,10 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
   let isLoading = $state(false);
-  let alerts = $state({
-    message: '',
-    success: false
-  }); 
+ 
   const { alert, showAlert} = useShowalert();
 
-  let {data, form }: {data: PageProps, form: ActionData} = $props();
+  let {form }: {data: PageProps, form: ActionData} = $props();
 
   // console.log('Login Page Props:',  form);
   $effect(() => {
@@ -29,10 +26,6 @@
       console.log(alert)
     }
   });
-
-console.log('Login Page Props:',  form);
-
-  console.log(alert)
 </script>
 
 <div class="px-[5%] py-4 h-full w-full flex justify-center items-center">

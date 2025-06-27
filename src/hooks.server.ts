@@ -30,6 +30,12 @@ const handleParaglide: Handle = ({ event, resolve }) =>
 	});
 
 const handleAuth: Handle = async ({ event, resolve }) => {
+	
+	// Bypass auth logic for specific, non-user-facing paths like this DevTools request.
+	if (event.url.pathname.startsWith('/.well-known')) {
+		// Let SvelteKit handle this request as it would normally, without our intervention.
+		return resolve(event);
+	}
 	const sessionPayload = getSession(event.cookies);
 
 	if (!sessionPayload) {
