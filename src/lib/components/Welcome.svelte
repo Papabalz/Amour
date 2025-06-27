@@ -9,7 +9,7 @@
     <h1 class="text-white font-bold text-2xl pt-5">Welcom to Amour!</h1>
     <button on:click={navigate} class="btn z-20 absolute md:right-[5%] top-[10%] right-[2%]">Booking</button>
      <div class="mt-[8%]">
-        <h2 class="md:text-4xl text-2xl font-bold  text-white text-center">Explore Zanzibar with us</h2>
+        <h2 class="md:text-4xl sm:text-2xl text-lg font-bold  text-white text-center">Explore Zanzibar with us</h2>
         <p class="text-white max-md:text-sm mt-5 text-center">Let make your visit to Tanzania a memorable one, our experience tour guides are available to help.</p>
      </div>
      <div class="flex flex-row items-center justify-around mt-[10%]">

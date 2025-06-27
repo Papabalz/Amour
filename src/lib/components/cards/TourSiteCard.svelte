@@ -75,7 +75,7 @@
             <p class="mb-5 text-lg italic">Tanzania is one of Africa’s most captivating travel destinations — a land of breathtaking landscapes, incredible wildlife, rich cultures, and warm hospitality. Whether you're an adventure seeker, a nature lover, or a cultural explorer, Tanzania offers unforgettable experiences you won't find anywhere else.</p>
         </div>
       <h3 class="mb-4 font-bold text-xl">Top Areas To Visit</h3>
-        <div class="scrollbar-hidden md:grid md:grid-cols-4 gap-2 md:gap-4 max-md:flex md:h-auto md:w-full  h-80 flex max-md:overflow-auto">
+        <div class="scrollbar-hidden md:grid md:grid-cols-4 gap-2 md:gap-4 max-md:flex md:h-auto md:w-full  flex max-md:overflow-auto">
     {#each tourAreaData as data (data.id)}
       <div class="card bg-base-100 md:w-full  lg:h-70 md:h-60 shadow-sm w-52 h-56">
         <figure>

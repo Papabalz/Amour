@@ -79,7 +79,7 @@ const openModal = (/** @type {TourGuide} */ data) => {
 
 </script>
 
-<div class="mt-[3%] px-[2%] md:px-[5%] w-full h-full">
+<div class="mt-[5%] px-[2%] md:px-[5%] w-full h-full">
   <h3 class="mb-4 font-bold text-xl">Meet Our Tour Guides</h3>
     <div class="scrollbar-hidden md:grid md:grid-cols-3 gap-2 md:gap-4 max-md:flex md:h-auto md:w-full  h-80 flex max-md:overflow-auto">
 {#each tourGuideData as data (data.id)}

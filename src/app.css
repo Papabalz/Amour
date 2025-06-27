@@ -5,5 +5,23 @@
         themes:   autumn --default; 
     }
 
+        html,
+        body {
+            height: 100%;
+            /* Ensure html and body take full height */
+            margin: 0;
+            /* Remove default body margin */
+            padding: 0;
+            /* Remove default body padding */
+        }
+    
+        body {
+            display: flex;
+            /* Enable flexbox */
+            flex-direction: column;
+            /* Stack children vertically */
+            min-height: 100vh;
+            /* Ensure body takes at least the full viewport height */   }
+
     
 
