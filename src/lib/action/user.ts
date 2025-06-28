@@ -13,6 +13,8 @@ export const createUser = async ({ request }: { request: Request }) => {
     const name = formData.get('name') as string;
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
+    const phone_number = formData.get('phone_number') as string;
+    const nationality = formData.get('nationality') as string;
 
     const existingUser = await db.select().from(user).where(eq(user.email, email));
 
@@ -34,7 +36,7 @@ export const createUser = async ({ request }: { request: Request }) => {
     
     try {
 
-        await db.insert(user).values({email, name, password: hashedPassword});
+        await db.insert(user).values({email, name, password: hashedPassword, nationality, phone_number});
 
         return { message: 'User created successfully', status: 302, success: true };
         
@@ -101,4 +103,24 @@ export const getUser = async ({ userId }: { userId: number }) => {
         // console.error('Error fetching user:', error);
         return fail(400, { message: 'Failed to fetch user', success: false });
     }
+};
+
+export const updateUser = async ({ request, userId }: { request: Request, userId: number }) => {
+    const formData = await request.formData();
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const phone_number = formData.get('phone_number') as string;
+    const nationality = formData.get('nationality') as string;
+
+await db.update(user)
+    .set({
+        name,
+        email,
+        phone_number,
+        nationality
+    })
+    .where(eq(user.id, userId));
+   
+
+    return { message: 'User updated successfully', status: 200, success: true };
 };

@@ -70,7 +70,7 @@
                     </td>
                     <td>{dayjs(data?.user?.created_At).format("MMMM D, YYYY")}</td>
                     <th>
-                      <button class="btn btn-xs">update</button>
+                      <a href="/update_user" class="btn btn-xs">update</a>
                     </th>
                   </tr>
                 </tbody>
@@ -79,13 +79,65 @@
           </div>
       {:else if checked === "bookings"}
         <div class="h-full flex items-center justify-center w-fit mx-auto">
-            <h1 class="text-2xl font-bold">Bookings</h1>
-            <!-- Add your bookings component here -->
+          <div class="overflow-x-auto">
+            <table class="table table-xs">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Number of guest</th>
+                  <th>nationality</th>
+                  <th>Arrival Date</th>
+                  <th>Pick up time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Cy Ganderton</td>
+                  <td>Success</td>
+                  <td>2</td>
+                  <td>Canada</td>
+                  <td>12/7/2025</td>
+                  <td>12 PM</td>
+                  <th>
+                    <a href="/update_booking" class="btn btn-xs">update</a>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       {:else}
         <div class="h-full flex items-center justify-center w-fit mx-auto">
-            <h1 class="text-2xl font-bold">Transactions</h1>
-            <!-- Add your transactions component here -->
+          <div class="overflow-x-auto">
+            <table class="table table-xs">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Reference</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Cy Ganderton</td>
+                  <td>ref6272jwjwk</td>
+                  <td>Success</td>
+                  <td>$2,000</td>
+                  <td>12/6/2025</td>
+                  <th>
+                    <a href="" class="btn btn-xs">View</a>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       {/if}
       </div>

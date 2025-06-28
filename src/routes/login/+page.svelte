@@ -16,13 +16,12 @@
       isLoading = false;
       alert.message = form.message;
       alert.success = form.success;
-      showAlert();
-      goto('/'); // Redirect to booking page on successful login
+      showAlert("/");
     } else if (form && form.success === false) {
       isLoading = false;
       alert.message = form.message;
       alert.success = form.success;
-      showAlert();
+      showAlert("");
       console.log(alert)
     }
   });
@@ -36,24 +35,6 @@
         Signin</legend>
    <form method="POST" action="/login" use:enhance={() => {
       isLoading = true;
-      // return async ({result}: {result: any}) => {
-      //   console.log('Form submitted:', result);
-      //   if (result?.data?.success === true) {
-      //     isLoading = false;
-      //     alerts = { message: result.data.message, success: result.data.success };
-      //     alert.message = alerts.message;
-      //     alert.success = alerts.success;
-      //     showAlert();
-      //     goto('/'); // Redirect to booking page on successful login
-      //   } else {
-      //     isLoading = false;
-      //     // alert.message = result?.data?.message;
-      //     alerts = { message: result.data.message, success: result.data.success };
-      //     alert.message = alerts.message;
-      //     alert.success = alerts.success;
-      //     showAlert();
-      //   }
-      // }
     } }>
     <input id="email" name="email" type="email" class="input" placeholder="Email" />
   

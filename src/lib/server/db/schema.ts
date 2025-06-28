@@ -6,7 +6,7 @@ export const user = pgTable('user', {
 	name: text('name').notNull(),
 	email: text('email').notNull().unique(),
 	password: text('password').notNull(),
-	phone_number: text('phone_number').notNull(),
+	phone_number: text('phone_number'),
 	nationality: text('nationality'),
 	created_At: text('created_at').default(new Date().toISOString()),
 	updated_At: text("updated_at").default(new Date().toISOString()),

@@ -49,7 +49,12 @@ const handleAuth: Handle = async ({ event, resolve }) => {
 		where: eq(userTable.id, sessionPayload.id),
 		columns: {
 			password: false // IMPORTANT: Never expose the password hash.
+		},
+		with: {
+			bookings: true,
+			transactions: true,
 		}
+
 	});
 
 	event.locals.user = user || null;
