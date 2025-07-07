@@ -10,7 +10,7 @@
 
     let { data } = $props() as { data: ServerData };
     let checked = $state("profileDetails")
-
+ console.log(data);
 </script>
 
 {#if data?.user}
@@ -58,7 +58,7 @@
                           </div>
                         </div>
                         <div>
-                          <div class="font-bold">{data?.user?.name.replace(/(?:^|\s)\S/g, (i) => i.toUpperCase())}</div>
+                          <!-- <div class="font-bold">{data?.user?.name.replace(/(?:^|\s)\S/g, (i) => i.toUpperCase())}</div> -->
                           <div class="text-sm opacity-50">{data?.user?.nationality || "United State"}</div>
                         </div>
                       </div>
@@ -93,18 +93,22 @@
                 </tr>
               </thead>
               <tbody>
+                {#each data?.user?.bookings || [] as book, index (book?.id)}
                 <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>Success</td>
-                  <td>2</td>
-                  <td>Canada</td>
-                  <td>12/7/2025</td>
-                  <td>12 PM</td>
+                  <th>{index + 1}</th>
+                  <td>{book?.name}</td>
+                  <td>{book?.status}</td>
+                  <td>{book?.guests}</td>
+                  <td>{data?.user?.nationality}</td>
+                  <td>{book?.arriveDate}</td>
+                  <td>{book?.pickup_time}</td>
                   <th>
-                    <a href="/update_booking" class="btn btn-xs">update</a>
+                    <a href={`/update_booking/${book?.id}`} class="btn btn-xs">update</a>
                   </th>
                 </tr>
+                {:else}
+                <tr><td colspan="8" class="text-center">You have no bookings yet.</td></tr>
+              {/each}
               </tbody>
             </table>
           </div>
@@ -124,17 +128,21 @@
                 </tr>
               </thead>
               <tbody>
+                {#each data?.user?.transactions || [] as trans, index (trans?.id)}
                 <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>ref6272jwjwk</td>
-                  <td>Success</td>
-                  <td>$2,000</td>
-                  <td>12/6/2025</td>
-                  <th>
+                  <th>{index + 1}</th>
+                  <td>{trans?.name}</td>
+                  <td>{trans?.reference}</td>
+                  <td>{trans?.status}</td>
+                  <td>${trans?.amount}}</td>
+                  <td>{dayjs(trans?.created_At).format("DD/MM/YYYY")}</td>
+                  <!-- <th>
                     <a href="" class="btn btn-xs">View</a>
-                  </th>
+                  </th> -->
                 </tr>
+                {:else}
+                <tr><td colspan="8" class="text-center">You have no transactions yet.</td></tr>
+                {/each}
               </tbody>
             </table>
           </div>

@@ -10,7 +10,7 @@ export const actions: Actions = {
 
         if (!locals.user) {
             // Handle the case when user is not logged in
-            return { error: 'User not authenticated' };
+            return { message: 'User not authenticated' };
         }
 
         console.log('Update User Action:', locals.user);

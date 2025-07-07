@@ -57,6 +57,8 @@ interface LayoutData {
 		<a href="/" class="">Home</a>
 	<a href="/about">About</a>
 	<a href="/contact">Contact</a>
+	<a href="/privacy">Privacy Policy</a>
+	<a href="/terms">Terms & Conditions</a>
 </div>
 	</div>
 </footer>
