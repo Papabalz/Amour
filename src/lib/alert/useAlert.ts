@@ -3,7 +3,7 @@ import { goto } from "$app/navigation";
 
 export default function useShowalert() {
   let alert = {
-   message: "",
+   message: "" as any,
    success: true as boolean,
    redirectUrl: "",
   };

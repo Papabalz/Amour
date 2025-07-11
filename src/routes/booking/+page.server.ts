@@ -1,7 +1,7 @@
 import { createBooking } from "$lib/action/booking";
 import type { Actions } from "./$types";
 
-export const actions: Actions = {
+export const actions = {
     default: async ({request, locals}) => {
         if (!locals.user) {
             // Handle the case when user is not logged in
@@ -12,5 +12,5 @@ return createBooking({request});
 
     }
 
-}
+} satisfies Actions;
 

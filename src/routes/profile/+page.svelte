@@ -14,8 +14,8 @@
 </script>
 
 {#if data?.user}
-<div class="md:px-[5%] px-[2%]">
-    <div class=" mt-[1%] flex flex-row items-center justify-center h-full">
+<div class="md:px-[5%] px-[2%] ">
+    <div class=" flex flex-row items-center justify-center mt-5">
     <div class="join">
         <input bind:group={checked} value="profileDetails" class="join-item btn" type="radio" name="options" aria-label="Profile Details" />
         <input bind:group={checked} value="bookings" class="join-item btn" type="radio" name="options" aria-label="Bookings" />

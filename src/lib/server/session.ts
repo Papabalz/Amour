@@ -1,7 +1,6 @@
-import { JWT_SECRET } from '$env/static/private';
 import jwt from 'jsonwebtoken';
 import type { Cookies } from '@sveltejs/kit';
-
+import { JWT_SECRET } from '$env/static/private';
 const COOKIE_NAME = 'amour_auth_token';
 
 // The user payload we'll store in the JWT

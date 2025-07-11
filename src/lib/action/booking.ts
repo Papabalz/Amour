@@ -72,7 +72,7 @@ if(!guests) return fail(400, { message: 'Guests is required', success: false });
 if(!pickup_location) return fail(400, { message: 'Pickup location is required', success: false });
 if(!length_of_stay) return fail(400, { message: 'Length of stay is required', success: false });
     
-console.log({userId, guideType, arriveDate, departDate, guests, pickup_location, status, payment, moreInfo, special_requests,pickup_time, length_of_stay})
+// console.log({userId, guideType, arriveDate, departDate, guests, pickup_location, status, payment, moreInfo, special_requests,pickup_time, length_of_stay})
 
     try {
       let data = await db.insert(booking).values({
@@ -88,13 +88,13 @@ console.log({userId, guideType, arriveDate, departDate, guests, pickup_location,
             special_requests,
             pickup_time,
             length_of_stay,
-});
+}).returning();
 
 if (payment === 'pay_later'){
 
         return { message: 'Booking created successfully', status: 200, success: true };
 } else {
-    return data;
+    return {data, message: 'Booking created successfully'};
 }
 
 

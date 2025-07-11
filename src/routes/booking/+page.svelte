@@ -1,6 +1,7 @@
 
 <script lang="ts">
 	import { enhance } from "$app/forms";
+	import { goto } from "$app/navigation";
 	import useShowalert from "$lib/alert/useAlert";
 	import type { User } from "$lib/server/db/schema";
 	import type { ActionData } from "./$types";
@@ -55,12 +56,16 @@ dailyPrice = 200
   let formElement: HTMLFormElement;
 
   function handlePaymentSubmit(event: Event) {
-    const input = event.currentTarget as HTMLInputElement;
-    booking.payment = input.value;
+    // const input = event.currentTarget as HTMLInputElement;
+    // booking.payment = input.value;
     if (formElement) {
       isLoading = true;
       formElement.requestSubmit();
     }
+    // if (input.value === 'pay_now') {
+    //   goto(`/payment/${form?.rowAsArray?.id }`);
+
+    // }
   }
 
 const { alert, showAlert} = useShowalert();
@@ -80,8 +85,13 @@ $effect(() => {
         alert.message = form.message;
         alert.success = form.success;
         showAlert("");
-        console.log(alert);
         (document.getElementById('my_modal_2') as HTMLDialogElement)?.close();
+  } else {
+    isLoading = false;
+    alert.message = form?.message;
+    console.log(form?.data);
+    showAlert(`/payment?bookId =${form?.data[0]?.id}&amount=${totalPrice}}`);
+    (document.getElementById('my_modal_2') as HTMLDialogElement)?.close();
   }
   });
  
@@ -93,7 +103,7 @@ $effect(() => {
   // Removed duplicate submitBooking function
 
 
-  console.log(form, booking)
+  console.log(form)
 
 </script>
 

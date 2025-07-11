@@ -3,7 +3,6 @@
   import type {ActionData, PageProps} from './$types';
   import useShowalert from '$lib/alert/useAlert';
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
   let isLoading = $state(false);
  
   const { alert, showAlert} = useShowalert();
@@ -22,7 +21,7 @@
       alert.message = form.message;
       alert.success = form.success;
       showAlert("");
-      console.log(alert)
+      // console.log(alert)
     }
   });
 </script>
