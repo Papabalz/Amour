@@ -25,7 +25,7 @@ export const booking = pgTable('booking', {
 	departDate: text('depart_date').notNull(),
 	guests: integer('guests').notNull(),
 	status: text('status').default('pending'),
-	payment: text('payment').default('pay_later'),
+	payment: text('payment').default('pay_on_arrival'),
 	pickup_location: text('pickup_location').notNull(),
 	pickup_time: time('pickup_time'),
 	length_of_stay: text('length_of_stay').notNull(),

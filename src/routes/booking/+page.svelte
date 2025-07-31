@@ -90,7 +90,9 @@ $effect(() => {
     isLoading = false;
     alert.message = form?.message;
     console.log(form?.data);
-    showAlert(`/payment?bookId =${form?.data[0]?.id}&amount=${totalPrice}}`);
+    if(form?.data[0]?.id) {
+    showAlert(`/payment/${form?.data[0]?.id}?totalPrice=${totalPrice}`);
+    }
     (document.getElementById('my_modal_2') as HTMLDialogElement)?.close();
   }
   });
@@ -237,7 +239,7 @@ $effect(() => {
         <h6 class="font-semibold text-lg px-2 rounded-lg bg-cyan-700 text-white">{totalPrice}</h6>
       </div>
       <div class="join">
-        <input class="join-item btn" type="radio"  name="payment" value="pay_later" aria-label="pay later"  onchange={handlePaymentSubmit}  />
+        <input class="join-item btn" type="radio"  name="payment" value="pay_on_arrival" aria-label="pay on arrival"  onchange={handlePaymentSubmit}  />
         <input class="join-item btn" type="radio" name="payment" value="pay_now" aria-label="pay now" onchange={handlePaymentSubmit}  />
        
       </div>

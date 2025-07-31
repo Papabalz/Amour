@@ -3,36 +3,8 @@ import { db } from '$lib/server/db';
 import { booking } from '$lib/server/db/schema';
 import { fail, json } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
-import type { StringDecoder } from 'node:string_decoder';
 
-interface Booking {
-    userId: number;
-    guideType: string;
-    arriveDate: string;
-    departDate: string;
-    guests: number;
-    pickup_location: string;
-    message?: string;
-    pickup_time?: string;
-    [key: string]: any;
-}
 
-interface BookingData {
-    userId: number;
-    guideType: string;
-    arriveDate: string;
-    departDate: string;
-    guests: number;
-    pickup_location: string;
-    status?: string | null;
-    payment?: string | null;
-    moreInfo?: string | null;
-    special_requests?: string | null;
-    isPaid?: string | null;
-    vehicle: string,
-    pickup_time: string,
-    length_of_stay: string,
-}
 
 export async function getBooking ({id}: {id: number }) {
 

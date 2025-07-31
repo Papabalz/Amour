@@ -1,4 +1,5 @@
 <script>
+     import * as m from '$lib/paraglide/messages';
     function navigate() {
         // Replace with your navigation logic, e.g.:
         window.location.href = '/booking';

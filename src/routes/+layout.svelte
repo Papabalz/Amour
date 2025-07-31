@@ -1,6 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 import type { User } from '$lib/server/db/schema';
+import { page } from '$app/state';
+import { locales, localizeHref } from '$lib/paraglide/runtime';
 
 interface LayoutData {
 	user: Omit<User, 'password'> | null;
@@ -8,7 +10,13 @@ interface LayoutData {
 
 	let { children, data } = $props() as { children: any; data: LayoutData };
 
-	// console.log('Layout Data:', data);
+	 const languageNames = {
+    en: 'English',
+    es: 'Español',
+  };
+
+
+ export const prerender = true
 
 </script>
 
@@ -20,15 +28,21 @@ interface LayoutData {
 		  </div>
 		  <ul
 			class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 gap-2 w-36 p-2 shadow">
+			<li><a href="/" class="md:hidden"><img src="/logo_no_bg.png"  class="w-10"  alt="logo"/></a></li>
 			<li><a href="/">Homepage</a></li>
+			
+			{#if data?.user}
 			<li><a href="/profile">Profile</a></li>
-			<form method="POST" action="/logout">
+				<li><a href="/booking">Booking</a></li>
+				<form method="POST" action="/logout">
 				<button type="submit" class="btn btn-neutral btn-sm">Logout</button>
 			</form>
+			{/if}
+			
 		  </ul>
 		</div>
 	  </div>
-	<a href="/" class=""><img src="/logo_no_bg.png"  class="w-18"  alt="logo"/></a>
+	<a href="/" class="max-md:hidden"><img src="/logo_no_bg.png"  class="w-16"  alt="logo"/></a>
 
 	{#if data?.user}
 		<div class="flex items-center gap-4 max-md:hidden">
@@ -42,6 +56,20 @@ interface LayoutData {
 			<a href="/login">Login</a>
 		</div>
 	{/if}
+	<!-- <div class="flex-none">
+	
+	<div class="dropdown dropdown-end">
+  <button  class="btn btn-ghost gap-1">
+    <span class="uppercase">{page.url.pathname.split('/')[1].toUpperCase()}</span>
+  </button>
+  <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-30">
+  <li>{#each locales as locale}
+		<a  class="btn btn-link style-none no-underline hover:underline-none text-black text-sm"  href={localizeHref(page.url.pathname, { locale })}>{languageNames[locale]?.toUpperCase()}</a>
+		{/each}</li>
+  </ul>
+</div>
+</div> -->
+
 </nav>
 
 <main class="flex-grow flex flex-col">
@@ -52,6 +80,7 @@ interface LayoutData {
 
 <footer class="footer footer-center p-4 bg-base-200 text-base-content b-0">
 	<div>
+		
 		<p>Copyright © 2023 Amour - All right reserved</p>
 		<div class="grid grid-flow-col gap-4">
 		<a href="/" class="">Home</a>

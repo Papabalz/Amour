@@ -3,6 +3,7 @@
     import Welcome from '$lib/components/Welcome.svelte';
     import TourGuideCard from '$lib/components/cards/TourGuideCard.svelte';
 	import TourSiteCard from '$lib/components/cards/TourSiteCard.svelte';
+        import * as m from '$lib/paraglide/messages';
 </script>
 
 <div class="h-full w-full max-md:scrollbar-hidden">

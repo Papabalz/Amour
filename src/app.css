@@ -2,7 +2,9 @@
 @plugin '@tailwindcss/typography';
 
 @plugin "daisyui" {
-        themes:   autumn --default; 
+        themes:   light --default; 
+        darkTheme: false;
+
     }
 
         html,
