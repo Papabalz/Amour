@@ -9,22 +9,20 @@
 </script>
 
 <div class="h-full w-full max-md:scrollbar-hidden">
-	<!-- <h1 class="font-bold text-2xl px-[5%] py-4">Home</h1> -->
 	<Welcome />
-    <div>
+    <div class="px-4 md:px-0">
 		<TourSiteCard />
 	</div>
-	<div>
+	<div class="px-4 md:px-0">
 		<TourGuideCard />
 	</div>
-	
-	<div>
+	<div class="px-4 md:px-0">
 		<About />
 	</div>
-    <div>
+    <div class="px-4 md:px-0">
         <Reviews />
     </div>
-	<div>
+	<div class="px-4 md:px-0">
 		<AfricaVerse />
 	</div>
 </div>

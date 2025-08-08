@@ -79,9 +79,9 @@
 	};
 </script>
 
-<div class="bg-gray-100 py-12 md:py-20">
+<div class="bg-gray-100 py-8 sm:py-12 md:py-20">
 	<div class="container mx-auto px-4 md:px-8">
-		<h3 class="mb-8 text-center text-3xl font-bold md:text-4xl">{t.tour_site_title()}</h3>
+		<h3 class="mb-6 text-center text-2xl font-bold sm:text-3xl sm:mb-8 md:text-4xl">{t.tour_site_title()}</h3>
 		<div
 			class="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 carousel md:space-x-0 md:overflow-visible"
 		>
@@ -96,8 +96,8 @@
 						<img src={data.picture} alt={data.name} class="h-full w-full object-cover" />
 					</figure>
 					<div class="card-body items-center justify-center text-center">
-						<h2 class="card-title text-2xl font-bold text-white">{data.name}</h2>
-						<p class="mt-2 text-white">{t.click_to_see_more()}</p>
+						<h2 class="card-title text-lg font-bold text-white sm:text-xl md:text-2xl">{data.name}</h2>
+						<p class="mt-1 text-sm text-white sm:mt-2 sm:text-base">{t.click_to_see_more()}</p>
 					</div>
 				</button>
 			{/each}
@@ -118,9 +118,9 @@
 					alt={selectedSite.name}
 					class="h-64 w-full rounded-t-lg object-cover"
 				/>
-				<div class="p-8">
-					<h3 class="text-2xl font-bold">{selectedSite.name}</h3>
-					<p class="mt-4">{selectedSite.details}</p>
+				<div class="p-4 sm:p-6 md:p-8">
+					<h3 class="text-xl font-bold sm:text-2xl">{selectedSite.name}</h3>
+					<p class="mt-3 text-sm leading-relaxed sm:text-base sm:mt-4">{selectedSite.details}</p>
 				</div>
 			</div>
 		</div>

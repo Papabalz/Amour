@@ -35,21 +35,21 @@
 
 <div class="bg-base-200 py-12 md:py-20">
 	<div class="container mx-auto px-4 md:px-8">
-		<h3 class="mb-8 text-center text-3xl font-bold md:text-4xl">{t.reviews_title()}</h3>
+		<h3 class="mb-6 text-center text-2xl font-bold sm:text-3xl md:mb-8 md:text-4xl">{t.reviews_title()}</h3>
 		<div
 			class="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 carousel md:space-x-0 md:overflow-visible"
 		>
 			{#each reviews as review (review.id)}
 				<div class="card carousel-item w-full bg-white shadow-lg md:w-full">
-					<div class="card-body">
-						<div class="mb-4 flex items-center">
-							<div class="avatar mr-4">
-								<div class="w-16 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+					<div class="card-body p-4 sm:p-6">
+						<div class="mb-3 flex items-center sm:mb-4">
+							<div class="avatar mr-3 sm:mr-4">
+								<div class="w-12 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 sm:w-16">
 									<img src={review.avatar} alt={review.name} />
 								</div>
 							</div>
 							<div>
-								<h4 class="text-lg font-bold">{review.name}</h4>
+								<h4 class="text-base font-bold sm:text-lg">{review.name}</h4>
 								<div class="rating mt-1">
 									{#each { length: 5 } as _, i}
 										<input
@@ -63,7 +63,7 @@
 								</div>
 							</div>
 						</div>
-						<p class="text-gray-600">{review.comment}</p>
+						<p class="text-sm leading-relaxed text-gray-600 sm:text-base">{review.comment}</p>
 					</div>
 				</div>
 			{/each}

@@ -85,9 +85,9 @@
 	}
 </script>
 
-<div class="py-12 md:py-20">
+<div class="py-8 sm:py-12 md:py-20">
 	<div class="container mx-auto px-4 md:px-8">
-		<h3 class="mb-8 text-center text-3xl font-bold md:text-4xl">{t.tour_guide_title()}</h3>
+		<h3 class="mb-6 text-center text-2xl font-bold sm:text-3xl md:mb-8 md:text-4xl">{t.tour_guide_title()}</h3>
 		<div
 			class="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 carousel md:space-x-0 md:overflow-visible"
 		>
@@ -98,12 +98,12 @@
 					<figure>
 						<img src={data.picture} alt={data.userName} class="h-64 w-full object-cover" />
 					</figure>
-					<div class="card-body p-6">
-						<h2 class="card-title text-2xl font-bold">{data.userName}</h2>
-						<p class="text-md mt-1 text-primary">{data.title}</p>
+					<div class="card-body p-4 sm:p-5 md:p-6">
+						<h2 class="card-title text-lg font-bold sm:text-xl md:text-2xl">{data.userName}</h2>
+						<p class="text-sm mt-1 text-primary sm:text-base md:text-md">{data.title}</p>
 						<!-- <p class="mt-4 text-gray-600">{data.bio.slice(0, 100)}...</p> -->
-						<div class="card-actions mt-6 justify-end">
-							<button on:click={() => openModal(data)} class="btn btn-primary">{t.view_profile()}</button>
+						<div class="card-actions mt-4 justify-end sm:mt-5 md:mt-6">
+							<button on:click={() => openModal(data)} class="btn btn-primary btn-sm sm:btn-md">{t.view_profile()}</button>
 						</div>
 					</div>
 				</div>
@@ -114,19 +114,19 @@
 
 {#if selectedProfile}
 	<dialog bind:this={dialog} class="modal">
-		<div transition:fade class="modal-box w-11/12 max-w-2xl rounded-lg p-8">
+		<div transition:fade class="modal-box w-11/12 max-w-2xl rounded-lg p-4 sm:p-6 md:p-8">
 			<form method="dialog">
 				<button class="btn btn-circle btn-ghost btn-sm absolute right-4 top-4">✕</button>
 			</form>
 			<div class="text-center">
 				<div class="avatar mx-auto mb-4">
-					<div class="w-24 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+					<div class="w-20 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 sm:w-24">
 						<img src={selectedProfile.picture} alt={selectedProfile.userName} />
 					</div>
 				</div>
-				<h3 class="text-2xl font-bold">{selectedProfile.userName}</h3>
-				<p class="text-md py-2 font-semibold text-primary">{selectedProfile.experience} of experience</p>
-				<p class="mt-4 text-left">{selectedProfile.bio}</p>
+				<h3 class="text-lg font-bold sm:text-xl md:text-2xl">{selectedProfile.userName}</h3>
+				<p class="text-sm py-2 font-semibold text-primary sm:text-base md:text-md">{selectedProfile.experience} of experience</p>
+				<p class="mt-3 text-left text-sm leading-relaxed sm:text-base md:mt-4 md:text-base">{selectedProfile.bio}</p>
 			</div>
 		</div>
 	</dialog>

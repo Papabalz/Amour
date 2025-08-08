@@ -83,16 +83,15 @@ interface LayoutData {
 
 <!-- {@render children()} -->
 
-<footer class="footer footer-center p-4 bg-base-200 text-base-content b-0">
+<footer class="footer footer-center p-4 bg-base-200 text-base-content b-0 sm:p-6">
 	<div>
-		
-		<p>Copyright © 2023 Amour - All right reserved</p>
-		<div class="grid grid-flow-col gap-4">
-		<a href="/" class="">Home</a>
-	<a href="/about">About</a>
-	<a href="/contact">Contact</a>
-	<a href="/privacy">Privacy Policy</a>
-	<a href="/terms">Terms & Conditions</a>
-</div>
+		<p class="text-sm sm:text-base">Copyright © 2023 Amour - All right reserved</p>
+		<div class="grid grid-flow-col gap-2 text-xs sm:gap-4 sm:text-sm md:text-base">
+			<a href="/" class="">Home</a>
+			<a href="/about">About</a>
+			<a href="/contact">Contact</a>
+			<a href="/privacy">Privacy Policy</a>
+			<a href="/terms">Terms & Conditions</a>
+		</div>
 	</div>
 </footer>
