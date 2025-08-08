@@ -12,7 +12,7 @@
 
 		<div class="grid gap-8 md:grid-cols-2">
 			<!-- Contact Form -->
-			<form class="space-y-4" on:submit|preventDefault={() => alert('Form submitted!')}>
+			<form class="space-y-4" onsubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
 				<div>
 					<label for="name" class="label">{t.contact_form_name()}</label>
 					<input type="text" id="name" name="name" class="input input-bordered w-full" required />

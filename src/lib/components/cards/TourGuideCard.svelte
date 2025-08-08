@@ -2,8 +2,17 @@
 	import { fade } from 'svelte/transition';
 	import { m as t } from '$lib/paraglide/messages.js';
 
-	/** @type {TourGuide[]} */
-	const tourGuideData = [
+	type TourGuide = {
+		id: number;
+		userName: string;
+		title: string;
+		bio: string;
+		sex: "Male" | "Female";
+		experience: string;
+		picture: string;
+	};
+
+	const tourGuideData: TourGuide[] = [
 		{
 			id: 1,
 			userName: 'Kenedy Bolo',
@@ -66,26 +75,11 @@
 		}
 	];
 
-	/** @type {TourGuide | null} */
-	let selectedProfile = null;
+	let selectedProfile: TourGuide | null = null;
 
-	/** @typedef {{
-    id: number;
-    userName: string;
-    title: string;
-    bio: string;
-    sex: "Male" | "Female";
-    experience: string;
-    picture: string;
-  }} TourGuide */
+	let dialog: HTMLDialogElement | null;
 
-	/** @type {HTMLDialogElement} */
-	let dialog: HTMLDialogElement |  null;
-
-	/**
-	 * @param {TourGuide} data
-	 */
-	function openModal(data) {
+	function openModal(data: TourGuide) {
 		selectedProfile = data;
 		dialog?.showModal();
 	}
