@@ -2,7 +2,7 @@
 	import '../app.css';
 import type { User } from '$lib/server/db/schema';
 import { page } from '$app/state';
-import { locales, localizeHref } from '$lib/paraglide/runtime';
+import { locales, localizeHref} from '$lib/paraglide/runtime';
 
 interface LayoutData {
 	user: Omit<User, 'password'> | null;
@@ -16,7 +16,7 @@ interface LayoutData {
   };
 
 
- export const prerender = true
+//  export const prerender = true
 
 </script>
 
@@ -44,6 +44,7 @@ interface LayoutData {
 	  </div>
 	<a href="/" class="max-md:hidden"><img src="/logo_no_bg.png"  class="w-16"  alt="logo"/></a>
 
+	<div class="flex">
 	{#if data?.user}
 		<div class="flex items-center gap-4 max-md:hidden">
 			<a href="/profile" class="btn btn-neutral">Profile</a>
@@ -56,20 +57,24 @@ interface LayoutData {
 			<a href="/login">Login</a>
 		</div>
 	{/if}
-	<!-- <div class="flex-none">
+	<div class="flex-none">
 	
 	<div class="dropdown dropdown-end">
-  <button  class="btn btn-ghost gap-1">
-    <span class="uppercase">{page.url.pathname.split('/')[1].toUpperCase()}</span>
+  <button  class="btn btn-ghost gap-1 ml-2">
+    <span class="uppercase">
+		
+		{page.url.pathname.split('/')[1] === "es"  ? 'es' : page.url.pathname.split('/')[1] === 'es' ? 'es' : 'en'}
+		
+	</span>
   </button>
   <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-30">
   <li>{#each locales as locale}
-		<a  class="btn btn-link style-none no-underline hover:underline-none text-black text-sm"  href={localizeHref(page.url.pathname, { locale })}>{languageNames[locale]?.toUpperCase()}</a>
+		<a  class="btn btn-link style-none no-underline hover:underline-none text-black text-sm"  href={localizeHref(page.url.pathname,  {locale})} >{languageNames[locale]}</a>
 		{/each}</li>
   </ul>
 </div>
-</div> -->
-
+</div>
+</div>
 </nav>
 
 <main class="flex-grow flex flex-col">
