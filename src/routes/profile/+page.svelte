@@ -1,11 +1,33 @@
 <script lang="ts">
-	import type { User } from "$lib/server/db/schema";
+  import type { User } from "$lib/server/db/schema";
   import dayjs from "dayjs";
 
-    // Define the type for the server data
+    // Extend the User type to include bookings and transactions
+    interface Booking {
+      id: number;
+      name: string;
+      status: string;
+      guests: number;
+      arriveDate: string;
+      pickup_time: string;
+    }
 
-	interface ServerData {
-        user: Omit<User, 'password'> | null;
+    interface Transaction {
+      id: number;
+      name: string;
+      reference: string;
+      status: string;
+      amount: number;
+      created_At: string;
+    }
+
+    interface ExtendedUser extends Omit<User, 'password'> {
+      bookings?: Booking[];
+      transactions?: Transaction[];
+    }
+
+  interface ServerData {
+        user: ExtendedUser | null;
     }
 
     let { data } = $props() as { data: ServerData };
