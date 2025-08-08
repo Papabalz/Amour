@@ -186,8 +186,11 @@ $effect(() => {
     <div>
       <input  id="userId" type="hidden" name="userId" class="input"  value={booking.userId} placeholder="userId" />
 {#if custom === false}
-      <button onclick={() => custom = true} type="button" class="btn btn-ghost flex flex-row items-center mt-3">{t.booking_customize()}
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/></svg>
+      <button onclick={() => custom = true} type="button" class="btn btn-ghost flex items-center gap-2 mt-3">
+        {t.booking_customize()}
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="flex-shrink-0">
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/>
+        </svg>
       </button>
       {/if}
       {#if custom === true}
@@ -225,7 +228,11 @@ $effect(() => {
         <input class="join-item btn" type="radio" name="payment" value="pay_now" aria-label={t.booking_modal_pay_now()}  onchange={handlePaymentSubmit}  />
        
       </div>
-      <button onclick={handleClose} type="button" class="btn btn-circle btn-sm float-right" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/></svg></button>
+      <button onclick={handleClose} type="button" class="btn btn-circle btn-sm absolute top-2 right-2" aria-label="close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="w-4 h-4">
+          <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/>
+        </svg>
+      </button>
       </div>
     </dialog>
     </div>
