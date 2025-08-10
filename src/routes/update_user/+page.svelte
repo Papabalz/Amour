@@ -8,7 +8,7 @@
       phone_number?: string;
       nationality?: string;
     };
-    
+        
     type PageProps = {
       user?: User;
     };
