@@ -21,13 +21,11 @@
 			information we may collect include your name, contact details, booking information, and
 			payment details.
 		</p>
-
 		<h2>2. How We Use Your Information</h2>
 		<p>
 			We use the information we collect to provide, operate, and maintain our services, process
 			your bookings, communicate with you, and improve our platform.
 		</p>
-
 		<h2>3. Security of Your Information</h2>
 		<p>
 			We take the security of your data seriously and use commercially acceptable means to protect
