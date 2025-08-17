@@ -2,7 +2,9 @@
 	import '../app.css';
 import type { User } from '$lib/server/db/schema';
 import { page } from '$app/state';
-import { locales, localizeHref} from '$lib/paraglide/runtime';
+import { locales, localizeHref, getLocale, setLocale } from '$lib/paraglide/runtime';
+import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 interface LayoutData {
 	user: Omit<User, 'password'> | null;
@@ -15,8 +17,27 @@ interface LayoutData {
     es: 'Español',
   };
 
+	let currentLocale = $state('en');
 
-//  export const prerender = true
+	// Initialize locale based on URL and localStorage
+	onMount(() => {
+		const savedLocale = localStorage.getItem('PARAGLIDE_LOCALE');
+		const urlLocale = page.url.pathname.startsWith('/es') ? 'es' : 'en';
+		const locale = savedLocale || urlLocale;
+		
+		currentLocale = locale;
+		setLocale(locale, { reload: false });
+		localStorage.setItem('PARAGLIDE_LOCALE', locale);
+	});
+
+	// Handle language switching
+	function switchLanguage(newLocale: any) {
+		currentLocale = newLocale;
+		setLocale(newLocale, { reload: false });
+		localStorage.setItem('PARAGLIDE_LOCALE', newLocale);
+		goto(localizeHref(page.url.pathname, { locale: newLocale }));
+		location.reload();
+	}
 
 </script>
 
@@ -62,14 +83,12 @@ interface LayoutData {
 	<div class="dropdown dropdown-end">
   <button  class="btn btn-ghost gap-1 ml-2">
     <span class="uppercase">
-		
-		{page.url.pathname.split('/')[1] === "es"  ? 'es' : page.url.pathname.split('/')[1] === 'es' ? 'es' : 'en'}
-		
+		{currentLocale}
 	</span>
   </button>
   <ul  class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-30">
   <li>{#each locales as locale}
-		<a  class="btn btn-link style-none no-underline hover:underline-none text-black text-sm"  href={localizeHref(page.url.pathname,  {locale})} >{languageNames[locale]}</a>
+		<button class="btn btn-link style-none no-underline hover:underline-none text-black text-sm w-full text-left" onclick={() => switchLanguage(locale)}>{languageNames[locale]}</button>
 		{/each}</li>
   </ul>
 </div>
