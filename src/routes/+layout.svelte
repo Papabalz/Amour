@@ -23,8 +23,8 @@ interface LayoutData {
 	onMount(() => {
 		const savedLocale = localStorage.getItem('PARAGLIDE_LOCALE');
 		const urlLocale = page.url.pathname.startsWith('/es') ? 'es' : 'en';
-		const locale = savedLocale || urlLocale;
-		
+		const locale: any = savedLocale || urlLocale;
+
 		currentLocale = locale;
 		setLocale(locale, { reload: false });
 		localStorage.setItem('PARAGLIDE_LOCALE', locale);

@@ -2,6 +2,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { goto } from "$app/navigation";
+	import { page } from '$app/stores';
 	import useShowalert from "$lib/alert/useAlert";
 	import type { User } from "$lib/server/db/schema";
 	import type { ActionData } from "./$types";
@@ -17,19 +18,45 @@
 
   const initialBookingState = {
     userId: data?.user?.id || 0,
+    name: data?.user?.name || '',
+    email: data?.user?.email || '',
+    country: data?.user?.nationality || '',
+    phone: data?.user?.phone_number || '',
+    location: '',
+    numberOfDays: 1,
+    adults: 1,
+    childrenAges: '',
     guideType: '',
-    arriveDate: '',
-    departDate: '',
     guests: 1,
     status: 'pending',
     isPaid: false,
     payment: '',
     special_requests: '',
-    pickup_time: '',
-    length_of_stay: 1,
+    travelDate: '',
+
     moreInfo: '',
     pickup_location: ''
   }
+
+  // Auto-fill location and price from URL parameters
+  let packagePrice = $state(100);
+  
+  $effect(() => {
+    const urlParams = new URLSearchParams($page.url.search);
+    const locationParam = urlParams.get('location');
+    const packageParam = urlParams.get('package');
+    const priceParam = urlParams.get('price');
+    
+    if (locationParam && packageParam) {
+      const locationName = locationParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      const packageName = packageParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      booking.location = `${locationName} - ${packageName}`;
+    }
+    
+    if (priceParam) {
+      packagePrice = parseInt(priceParam) || 100;
+    }
+  });
 
   let booking = $state(initialBookingState);
 
@@ -37,8 +64,16 @@
   let totalPrice = $state(0);
 
   $effect(() => {
-    dailyPrice = booking.guideType ? 200 : 0;
-    totalPrice = dailyPrice * Number(booking.length_of_stay || 0);
+    let adultsOver15 = 0;
+    
+    if (booking.childrenAges.trim()) {
+      const ages = booking.childrenAges.split(',').map(age => parseInt(age.trim())).filter(age => !isNaN(age));
+      adultsOver15 = ages.filter(age => age >= 15).length;
+    }
+    
+    const totalAdults = booking.adults + adultsOver15;
+    dailyPrice = packagePrice * totalAdults;
+    totalPrice = dailyPrice * Number(booking.numberOfDays || 1);
   });
 
 
@@ -89,154 +124,204 @@ $effect(() => {
 
 
 
-<form class="space-y-4 p-4 flex items-center justify-center" method="POST" bind:this={formElement} action="/booking" use:enhance={() => {
-  isLoading = true;
-}}>
-  <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 relative">
-    <legend class="fieldset-legend text-2xl">{t.booking_title()}</legend>
-    <label class="label" for="guideType">{t.booking_choose_guide()}</label>
-    <select class="select" name="guideType" id="guideType" bind:value={booking.guideType} required>
-      <option value="">{t.booking_choose_guide()}</option>
-      <option value="Kenedy Bolo">Kenedy Bolo</option>
-      <option value="Amina Bello">Amina Bello</option>
-      <option value="Chinyere Eze">Chinyere Eze</option>
-      <option value="Peter Nwankwo">Peter Nwankwo</option>
-      <option value="Tunde Lawal">Tunde Lawal</option>
-      <option value="Fatima Hassan">Fatima Hassan</option>
-    </select>
-    <!-- <input id="guideType" type="text" class="input" bind:value={booking.guideType} placeholder="Guide Type" required /> -->
-    
-    <label class="label" for="arriveDate">{t.booking_arrival_date()}</label>
-    <input type="date" id="arriveDate" name="arriveDate" class="input" bind:value={booking.arriveDate} required />
-    
-    <label class="label" for="departDate">{t.booking_departure_date()}</label>
-    <input type="date" name="departDate" id="departDate" class="input" bind:value={booking.departDate} required />
-
-    <label class="label" for="pcikupTime">{t.booking_pickup_time()}</label>
-    <input type="time" id="pickupTime" name="pickup_time" class="input" bind:value={booking.pickup_time} />
-
-    <label class="label" for="pcikupLocation">{t.booking_pickup_location()}</label>
-    <input type="text" id="pickupLocation" name="pickup_location" class="input" bind:value={booking.pickup_location} placeholder="Pickup Location" required />
-
-    <label class="label" for="number_of_guests">{t.booking_number_of_guests()}</label>
-    <input type="number" class="input" name="guests" id="number_of_guests" bind:value={booking.guests} min="1" required />
-    <!-- <select class="select" name="guests" id="number_of_guests" bind:value={booking.guests} placeholder="Number of Guests">
-      <option value="">Number of Guests</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>  
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-    </select> -->
-
-    <label class="label" for="duration">{t?.booking_length_of_stay()}</label>
-    <input type="number" class="input" name="length_of_stay" id="duration" bind:value={booking.length_of_stay} min="1" required />
-
-    <!-- <select class="select" name="length_of_stay" id="duration" bind:value={booking.length_of_stay} placeholder="Length of Stay">
-      <option value="">Length of Stay</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>  
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-      <option value="25">25</option>
-      <option value="26">26</option>
-      <option value="27">27</option>
-      <option value="28">28</option>
-      <option value="29">29</option>
-      <option value="30">30</option>
-      <option value="31">31</option>
-    </select> -->
-    <label class="label" for="more_info">{t.booking_note()}</label>
-          <textarea class="textarea" id="more_info" name="moreInfo" placeholder="Note" bind:value={booking.moreInfo}></textarea>
-    <div>
-      <input  id="userId" type="hidden" name="userId" class="input"  value={booking.userId} placeholder="userId" />
-{#if custom === false}
-      <button onclick={() => custom = true} type="button" class="btn btn-ghost flex items-center gap-2 mt-3">
-        {t.booking_customize()}
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="flex-shrink-0">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/>
-        </svg>
-      </button>
-      {/if}
-      {#if custom === true}
-      <div>
-           <!-- <label class="label" for="vehicle">Vehicle Type</label> -->
-          <!-- <input type="text" id="vehicle" name="vehicle" class="input"  bind:value={booking.vehicle} onchange={(e) => booking.vehicle = (e.target as HTMLInputElement)?.value} placeholder="Vehicle" /> -->
-          <label class="label" for="special_requests">{t.booking_special_request()}</label>
-          <textarea class="textarea" id="special_requests" name="special_requests" placeholder="Tell us about extra services you want to include" bind:value={booking.special_requests}></textarea>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-8">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">{t.booking_title()}</h1>
+        <p class="text-gray-600">Complete your booking details below</p>
       </div>
-      {/if}
-    </div>
 
-    <div class="items bg-[#f5f5f5] w-auto p-2 rounded-box">
-      <h4 class="text-md font-bold">{t.booking_daily_price()}: ${dailyPrice}</h4>
-      <h4 class="text-lg font-bold">{t.booking_total_price()}: ${totalPrice}</h4>
-    </div>
+      <form method="POST" bind:this={formElement} action="/booking" use:enhance={() => {
+        isLoading = true;
+      }}>
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Main Form -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Personal Information
+              </h2>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
 
-    <button type="button" class="btn btn-neutral mt-4" disabled={!booking.guideType || !booking.arriveDate || !booking.departDate || !booking.pickup_location || !booking.guests || !booking.length_of_stay} onclick={()=> (document.getElementById('my_modal_2') as HTMLDialogElement)?.showModal()}>
-      {#if isLoading}
-        <span class="loading loading-spinner loading-sm"></span>
-      {/if}
-      {t.booking_book_button()}
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="name">Full Name</label>
+                  <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.name} placeholder="Enter your full name" required />
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="email">Email Address</label>
+                  <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.email} placeholder="your@email.com" required />
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="country">Country</label>
+                  <input type="text" id="country" name="country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.country} placeholder="Your country" required />
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="phone">WhatsApp/Phone</label>
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.phone} placeholder="+1 234 567 8900" required />
+                </div>
+              </div>
+
+              <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Tour Details
+              </h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="location">Tour Package</label>
+                  <input type="text" id="location" name="location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50" bind:value={booking.location} placeholder="Selected tour package" required readonly />
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="numberOfDays">Duration</label>
+                  <input type="number" id="numberOfDays" name="numberOfDays" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.numberOfDays} min="1" placeholder="Days" required />
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="travelDate">Travel Date</label>
+                  <input type="date" id="travelDate" name="travelDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.travelDate} required />
+                </div>
+
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="pickupLocation">Pickup Location</label>
+                  <input type="text" id="pickupLocation" name="pickup_location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.pickup_location} placeholder="Hotel name or address" required />
+                </div>
+              </div>
+
+              <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                Group Information
+              </h3>
+              
+              <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="adults">Adults</label>
+                  <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" name="adults" id="adults" bind:value={booking.adults} min="1" required />
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="childrenAges">Children</label>
+                  <input type="text" id="childrenAges" name="childrenAges" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" bind:value={booking.childrenAges} placeholder="e.g. 2 kids (8, 12)" />
+                  <p class="text-xs text-gray-500 mt-1">Format: Number of kids (ages). Under 15 free, 15+ charged as adults</p>
+                </div>
+              </div>
+
+              <div class="mb-8">
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="more_info">Additional Notes</label>
+                <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="more_info" name="moreInfo" rows="4" placeholder="Any special requests or additional information..." bind:value={booking.moreInfo}></textarea>
+              </div>
+              {#if custom === false}
+                <button onclick={() => custom = true} type="button" class="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-2 mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="flex-shrink-0">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"/>
+                  </svg>
+                  Add Special Requests
+                </button>
+              {/if}
+              
+              {#if custom === true}
+                <div class="mb-6">
+                  <label class="block text-sm font-medium text-gray-700 mb-2" for="special_requests">Special Requests</label>
+                  <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="special_requests" name="special_requests" rows="3" placeholder="Any special services or accommodations needed..." bind:value={booking.special_requests}></textarea>
+                </div>
+              {/if}
+              
+              <input id="userId" type="hidden" name="userId" value={booking.userId} />
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-6">Booking Summary</h3>
+              
+              <div class="space-y-4 mb-6">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Daily Rate:</span>
+                  <span class="font-medium">${dailyPrice}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Duration:</span>
+                  <span class="font-medium">{booking.numberOfDays} day{booking.numberOfDays > 1 ? 's' : ''}</span>
+                </div>
+                <div class="border-t pt-4">
+                  <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span class="text-blue-600">${totalPrice}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled={!booking.name || !booking.email || !booking.country || !booking.phone || !booking.location || !booking.numberOfDays || !booking.travelDate || !booking.pickup_location || !booking.adults} onclick={()=> (document.getElementById('my_modal_2') as HTMLDialogElement)?.showModal()}>
+                {#if isLoading}
+                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                {/if}
+                Complete Booking
+              </button>
+              
+              <p class="text-xs text-gray-500 text-center mt-4">Secure booking powered by Amour Tours</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box max-w-md">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">{t.booking_modal_hello()}{data?.user?.name?.replace(/\b\w/g, (i) => i.toUpperCase())}</h3>
+    
+    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+      <div class="flex justify-between items-center">
+        <span class="text-gray-700">Total Amount:</span>
+        <span class="text-2xl font-bold text-blue-600">${totalPrice}</span>
+      </div>
+    </div>
+    
+    <p class="text-gray-600 mb-6">{t.booking_modal_select_type()}</p>
+    
+    <div class="space-y-3">
+      <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+        <input type="radio" name="payment" value="pay_later" class="mr-3" onchange={handlePaymentSubmit} />
+        <div>
+          <div class="font-medium text-gray-800">{t.booking_modal_pay_on_arrival()}</div>
+          <div class="text-sm text-gray-500">Pay when you arrive at the destination</div>
+        </div>
+      </label>
+      
+      <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+        <input type="radio" name="payment" value="pay_now" class="mr-3" onchange={handlePaymentSubmit} />
+        <div>
+          <div class="font-medium text-gray-800">{t.booking_modal_pay_now()}</div>
+          <div class="text-sm text-gray-500">Secure online payment</div>
+        </div>
+      </label>
+    </div>
+    
+    <button onclick={handleClose} type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" aria-label="close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
     </button>
-  </fieldset>
-  <div>
-    <dialog id="my_modal_2" class="modal">
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">{t.booking_modal_hello()}{data?.user?.name.replace(/\b\w/g, (i) => i.toUpperCase())}</h3>
-        <div class="flex flex-row justify-between items-center">
-        <p class="py-4">{t.booking_modal_select_type()}</p>
-        <h6 class="font-semibold text-lg px-2 rounded-lg bg-cyan-700 text-white">{totalPrice}</h6>
-      </div>
-      <div class="join">
-        <input class="join-item btn" type="radio"  name="payment" value="pay_later" aria-label={t.booking_modal_pay_on_arrival()}  onchange={handlePaymentSubmit}  />
-        <input class="join-item btn" type="radio" name="payment" value="pay_now" aria-label={t.booking_modal_pay_now()}  onchange={handlePaymentSubmit}  />
-       
-      </div>
-      <button onclick={handleClose} type="button" class="btn btn-circle btn-sm absolute top-2 right-2" aria-label="close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="w-4 h-4">
-          <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/>
-        </svg>
-      </button>
-      </div>
-    </dialog>
-    </div>
-</form>
+  </div>
+</dialog>
 
 
 <div>

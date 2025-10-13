@@ -3,7 +3,7 @@
 	import { m } from '$lib/paraglide/messages.js';
 
 	function navigate() {
-		goto('/booking');
+		goto('/packages');
 	}
 </script>
 

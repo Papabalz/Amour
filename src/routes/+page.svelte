@@ -13,9 +13,9 @@
     <div class="px-4 md:px-0">
 		<TourSiteCard />
 	</div>
-	<div class="px-4 md:px-0">
+	<!-- <div class="px-4 md:px-0">
 		<TourGuideCard />
-	</div>
+	</div> -->
 	<div class="px-4 md:px-0">
 		<About />
 	</div>

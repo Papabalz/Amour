@@ -5,59 +5,81 @@
 	const tourAreaData = [
 		{
 			id: 1,
-			name: 'Serengeti National Park',
-			details: t.tour_site_1_details(),
-			picture:
-				'https://media.istockphoto.com/id/1136053333/photo/elephant-and-lion.webp?a=1&b=1&s=612x612&w=0&k=20&c=rGXhl00oROy53jzfH_yOelzPmlJBHkkNE8xvZ5BZPjg='
+			name: 'Nakupenda Sandbank',
+			details: t.nakupenda_details(),
+			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 2,
-			name: 'Mount Kilimanjaro ',
-			details: t.tour_site_2_details(),
-			picture:
-				'https://plus.unsplash.com/premium_photo-1664304370557-233bccc0ac85?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TW91bnQlMjBLaWxpbWFuamFyb3xlbnwwfHwwfHx8MA%3D%3D'
+			name: 'Safari Blue',
+			details: t.safari_blue_details(),
+			picture: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 3,
-			name: 'Zanzibar Island',
-			details: t.tour_site_3_details(),
-			picture:
-				'https://images.unsplash.com/photo-1711091704998-3bea86948c83?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFphbnppYmFyJTIwSXNsYW5kfGVufDB8fDB8fHww'
+			name: 'Spice Tour',
+			details: t.spice_tour_details(),
+			picture: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 4,
-			name: 'Ngorongoro Crater',
-			details: t.tour_site_4_details(),
-			picture:
-				'https://media.istockphoto.com/id/1196998582/photo/safari-vehicles-in-between-large-herds-of-animals-ngorongoro-crater-tanzania.webp?a=1&b=1&s=612x612&w=0&k=20&c=NxPZtigfAGjF_Ld3Qm04Md_hEBiCrdwXzdYi1P5OJLY='
+			name: 'Prison Island',
+			details: t.prison_island_details(),
+			picture: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 5,
-			name: 'Tarangire National Park',
-			details: t.tour_site_5_details(),
-			picture:
-				'https://images.unsplash.com/photo-1707410437019-40c82e3a417f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VGFyYW5naXJlJTIwTmF0aW9uYWwlMjBQYXJrfGVufDB8fDB8fHww'
+			name: 'Jozani Forest',
+			details: t.jozani_forest_details(),
+			picture: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 6,
-			name: 'Nyerere National Park',
-			details: t.tour_site_6_details(),
-			picture:
-				'https://media.istockphoto.com/id/2175769062/photo/female-masai-giraffe-and-impala-in-nyerere-national-park-selous-game-reserve-in-southern.webp?a=1&b=1&s=612x612&w=0&k=20&c=7N7kln0Ielh1Gwev7H9lm0BVLqIAZNJQlaGU6Tq-tyk='
+			name: 'Snorkel at Mnemba',
+			details: t.mnemba_snorkel_details(),
+			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 7,
-			name: 'Lake Manyara National Park ',
-			details: t.tour_site_7_details(),
-			picture:
-				'https://media.istockphoto.com/id/1224066657/photo/flying-flamingo-over-the-lake-manyara.webp?a=1&b=1&s=612x612&w=0&k=20&c=t0Sc7OfcJGE6xWKOeBtZyC0ePLdjdSYtWyuHnTLhFhA='
+			name: 'Culture Tour',
+			details: t.culture_tour_details(),
+			picture: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&auto=format&fit=crop&q=60'
 		},
 		{
 			id: 8,
-			name: 'Mafia Island',
-			details: t.tour_site_8_details(),
-			picture:
-				'https://images.unsplash.com/photo-1675843776560-b936ba1a931a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TWFmaWElMjBJc2xhbmR8ZW58MHx8MHx8fDA%3D'
+			name: 'Sunset Cruise',
+			details: t.sunset_cruise_details(),
+			picture: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=60'
+		},
+		{
+			id: 9,
+			name: 'Blue Lagoon',
+			details: t.blue_lagoon_details(),
+			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
+		},
+		{
+			id: 10,
+			name: 'Kizimkazi Dolphin',
+			details: t.kizimkazi_dolphin_details(),
+			picture: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=60'
+		},
+		{
+			id: 11,
+			name: 'Buggy/Quad Bike',
+			details: t.buggy_quad_details(),
+			picture: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60'
+		},
+		{
+			id: 12,
+			name: 'Salaam Cave',
+			details: t.salaam_cave_details(),
+			picture: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&auto=format&fit=crop&q=60'
+		},
+		{
+			id: 13,
+			name: 'The Rock Restaurant',
+			details: t.rock_restaurant_details(),
+			picture: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&auto=format&fit=crop&q=60'
 		}
 	];
 
@@ -81,23 +103,23 @@
 
 <div class="bg-gray-100 py-8 sm:py-12 md:py-20">
 	<div class="container mx-auto px-4 md:px-8">
-		<h3 class="mb-6 text-center text-2xl font-bold sm:text-3xl sm:mb-8 md:text-4xl">{t.tour_site_title()}</h3>
+		<h3 class="mb-6 text-center text-2xl font-bold sm:text-3xl sm:mb-8 md:text-4xl">{t.zanzibar_experiences_title()}</h3>
 		<div
-			class="md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 carousel md:space-x-0 md:overflow-visible"
+			class="grid grid-cols-2 gap-4 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 md:space-x-0 md:overflow-visible"
 		>
 			{#each tourAreaData as data (data.id)}
 				<button
 					type="button"
-					class="card carousel-item image-full h-80 transform cursor-pointer shadow-lg transition-transform duration-300 hover:scale-105 md:w-full text-left p-0 border-0 bg-transparent focus:outline-none"
+					class="card  image-full md:h-72 h-60 transform cursor-pointer shadow-lg transition-transform duration-300 hover:scale-105 md:w-full text-left p-0 border-0 bg-transparent focus:outline-none"
 					aria-label={`See more details about ${data.name}`}
 					on:click={() => openModal(data)}
 				>
 					<figure>
 						<img src={data.picture} alt={data.name} class="h-full w-full object-cover" />
 					</figure>
-					<div class="card-body items-center justify-center text-center">
-						<h2 class="card-title text-lg font-bold text-white sm:text-xl md:text-2xl">{data.name}</h2>
-						<p class="mt-1 text-sm text-white sm:mt-2 sm:text-base">{t.click_to_see_more()}</p>
+					<div class="card-body items-center justify-center text-center  bg-opacity-5">
+						<h2 class="card-title text-lg font-bold text-white drop-shadow-lg sm:text-xl md:text-2xl">{data.name}</h2>
+						<p class="mt-[30%] text-sm text-white drop-shadow-lg  sm:text-base">{t.click_to_see_more()}</p>
 					</div>
 				</button>
 			{/each}
@@ -129,27 +151,27 @@
 
 <style>
 	@media (max-width: 767px) {
-		.carousel {
+		/* .carousel {
 			display: flex;
 			overflow-x: auto;
 			scroll-snap-type: x mandatory;
-			-webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
-			padding-bottom: 1rem; /* Add some space for the scrollbar */
-		}
+			-webkit-overflow-scrolling: touch; 
+			padding-bottom: 1rem;
+		} */
 
-		.carousel-item {
-			flex: 0 0 80%; /* Adjust card width for smaller screens */
+		/* .carousel-item {
+			flex: 0 0 80%; 
 			scroll-snap-align: start;
 			margin-right: 1rem;
-		}
+		} */
 
-		.carousel::-webkit-scrollbar {
-			display: none; /* Hide scrollbar on WebKit browsers */
-		}
+		/* .carousel::-webkit-scrollbar {
+			display: none; 
+		} */
 
-		.carousel {
-			scrollbar-width: none; /* Hide scrollbar on Firefox */
-			-ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
-		}
+		/* .carousel {
+			scrollbar-width: none; 
+			-ms-overflow-style: none; 
+		} */
 	}
 </style>
