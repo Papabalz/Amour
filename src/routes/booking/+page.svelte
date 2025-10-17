@@ -38,23 +38,51 @@
     pickup_location: ''
   }
 
-  // Auto-fill location and price from URL parameters
-  let packagePrice = $state(100);
+  // Auto-fill location from URL parameters
+  let packageType = $state('');
+  
+  function getGroupPrice(people: number, packageType: string): number {
+    const pricing: Record<string, Record<number | string, number>> = {
+      'Stone Town Tour': { 1: 140, 2: 100, 3: 70, 4: 60, 5: 50, '6+': 40 },
+      'Sandbank Day Trip': { 1: 170, 2: 130, 3: 90, 4: 65, 5: 50, '6+': 45 },
+      'Safari Blue Tour': { 1: 200, 2: 140, 3: 110, 4: 75, 5: 55, '6+': 50 },
+      'Spice Tour': { 1: 120, 2: 90, 3: 65, 4: 50, 5: 40, '6+': 35 },
+      'Prison Island Tour': { 1: 150, 2: 110, 3: 70, 4: 60, 5: 55, '6+': 45 },
+      'Jozani Forest Tour': { 1: 130, 2: 90, 3: 60, 4: 50, 5: 40, '6+': 35 },
+      'Mnemba Snorkel Trip': { 1: 180, 2: 140, 3: 90, 4: 70, 5: 60, '6+': 55 },
+      'Culture Tour': { 1: 150, 2: 110, 3: 70, 4: 50, 5: 45, '6+': 35 },
+      'Sunset Cruise': { 1: 110, 2: 90, 3: 60, 4: 50, 5: 40, '6+': 30 },
+      'Blue Lagoon': { 1: 110, 2: 110, 3: 65, 4: 40, 5: 40, '6+': 35 },
+      'Kizimkazi Dolphin Tour': { 1: 160, 2: 160, 3: 80, 4: 65, 5: 60, '6+': 40 },
+      'Buggy/Quad Bike Adventure': { 1: 190, 2: 190, 3: 190, 4: 190, 5: 190, '6+': 190 },
+      'Salaam Cave Tour': { 1: 120, 2: 90, 3: 60, 4: 40, 5: 40, '6+': 30 },
+      'The Rock Restaurant': { 1: 110, 2: 60, 3: 40, 4: 40, 5: 40, '6+': 30 },
+      'Stone Town Tour & Spice Tour': { 1: 230, 2: 120, 3: 80, 4: 70, 5: 55, '6+': 50 },
+      'Stone Town & Prison Island Tour': { 1: 220, 2: 130, 3: 90, 4: 80, 5: 70, '6+': 60 },
+      'Prison Island & Nakupenda Tour': { 1: 240, 2: 140, 3: 120, 4: 80, 5: 65, '6+': 50 },
+      'Stone Town & Spice & Prison Tour': { 1: 370, 2: 310, 3: 270, 4: 230, 5: 160, '6+': 120 },
+      'Jozani & Spice Tour': { 1: 210, 2: 120, 3: 90, 4: 70, 5: 55, '6+': 40 },
+      'Jozani & The Rock Tour': { 1: 240, 2: 170, 3: 170, 4: 160, 5: 120, '6+': 55 },
+      'The Rock & Salaam Cave Tour': { 1: 240, 2: 140, 3: 90, 4: 80, 5: 60, '6+': 40 }
+    };
+    
+    const packagePricing = pricing[packageType];
+    if (!packagePricing) return 100;
+    
+    if (people >= 6) return packagePricing['6+'] || 100;
+    return packagePricing[people] || 100;
+  }
   
   $effect(() => {
     const urlParams = new URLSearchParams($page.url.search);
     const locationParam = urlParams.get('location');
     const packageParam = urlParams.get('package');
-    const priceParam = urlParams.get('price');
     
     if (locationParam && packageParam) {
       const locationName = locationParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       const packageName = packageParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       booking.location = `${locationName} - ${packageName}`;
-    }
-    
-    if (priceParam) {
-      packagePrice = parseInt(priceParam) || 100;
+      packageType = packageName;
     }
   });
 
@@ -72,7 +100,8 @@
     }
     
     const totalAdults = booking.adults + adultsOver15;
-    dailyPrice = packagePrice * totalAdults;
+    const pricePerPerson = getGroupPrice(totalAdults, packageType);
+    dailyPrice = pricePerPerson * totalAdults;
     totalPrice = dailyPrice * Number(booking.numberOfDays || 1);
   });
 
@@ -248,7 +277,26 @@ $effect(() => {
             <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-8">
               <h3 class="text-xl font-semibold text-gray-800 mb-6">Booking Summary</h3>
               
+              {#if packageType}
+                <div class="mb-6 p-4 bg-blue-50 rounded-lg">
+                  <h4 class="font-semibold text-gray-800 mb-3 text-center">Group Pricing (per person)</h4>
+                  <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex justify-between"><span>1 person:</span><span class="font-semibold">${getGroupPrice(1, packageType)}</span></div>
+                    <div class="flex justify-between"><span>2 people:</span><span class="font-semibold">${getGroupPrice(2, packageType)}</span></div>
+                    <div class="flex justify-between"><span>3 people:</span><span class="font-semibold">${getGroupPrice(3, packageType)}</span></div>
+                    <div class="flex justify-between"><span>4 people:</span><span class="font-semibold">${getGroupPrice(4, packageType)}</span></div>
+                    <div class="flex justify-between"><span>5 people:</span><span class="font-semibold">${getGroupPrice(5, packageType)}</span></div>
+                    <div class="flex justify-between"><span>6+ people:</span><span class="font-semibold">${getGroupPrice(6, packageType)}</span></div>
+                  </div>
+                  <p class="text-xs text-gray-600 mt-2 text-center">Larger groups get better rates!</p>
+                </div>
+              {/if}
+              
               <div class="space-y-4 mb-6">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Price per person:</span>
+                  <span class="font-medium">${getGroupPrice(booking.adults + (booking.childrenAges.trim() ? booking.childrenAges.split(',').map(age => parseInt(age.trim())).filter(age => !isNaN(age) && age >= 15).length : 0), packageType)}</span>
+                </div>
                 <div class="flex justify-between text-sm">
                   <span class="text-gray-600">Daily Rate:</span>
                   <span class="font-medium">${dailyPrice}</span>

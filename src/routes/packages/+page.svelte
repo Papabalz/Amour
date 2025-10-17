@@ -13,114 +13,141 @@
 		const numericPrice = price.replace('$', '');
 		goto(`/booking?location=${encodeURIComponent(locationName)}&package=${encodeURIComponent(packageName)}&price=${numericPrice}`);
 	}
+
+	function getGroupPrice(people: number): number {
+		if (people === 1) return 140;
+		if (people === 2) return 100;
+		if (people === 3) return 70;
+		if (people === 4) return 60;
+		if (people === 5) return 50;
+		return 40; // 6+ people
+	}
 	
 	const locations = [
 		{
-			name: 'Nakupenda Sandbank',
-			packages: [
-				{ name: 'Sandbank Day Trip', duration: '6 hours', price: '$75', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Sandbank & Snorkeling', duration: '1 day', price: '$120', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Island Hopping Adventure', duration: '3 days', price: '$350', image: '/zanzibar.jpg' },
-				{ name: 'Beach Paradise Package', duration: '5 days', price: '$580', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' }
-			]
-		},
-		{
 			name: 'Safari Blue',
 			packages: [
-				{ name: 'Safari Blue Half Day', duration: '6 hours', price: '$85', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Safari Blue Full Day', duration: '1 day', price: '$140', image: '/zanzibar.jpg' },
-				{ name: 'Safari Blue & Culture', duration: '3 days', price: '$420', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Safari Blue Explorer', duration: '5 days', price: '$650', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' }
+				{ name: 'Safari Blue Tour', duration: 'Full day', price: 'From $50', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 200 }
 			]
 		},
 		{
-			name: 'Spice Tour',
+			name: 'Stone Town',
 			packages: [
-				{ name: 'Spice Farm Visit', duration: '6 hours', price: '$45', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Spice & Stone Town', duration: '1 day', price: '$90', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-				{ name: 'Spice & Culture Tour', duration: '3 days', price: '$280', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Spice Island Discovery', duration: '5 days', price: '$450', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' }
+				{ name: 'Stone Town Tour', duration: '6 hours', price: 'From $40', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 140 }
 			]
 		},
 		{
 			name: 'Prison Island',
 			packages: [
-				{ name: 'Giant Tortoise Visit', duration: '6 hours', price: '$60', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=300&fit=crop' },
-				{ name: 'Prison Island & Snorkeling', duration: '1 day', price: '$125', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Island History Tour', duration: '3 days', price: '$380', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=300&fit=crop' },
-				{ name: 'Prison Island Explorer', duration: '5 days', price: '$600', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' }
+				{ name: 'Prison Island Tour', duration: '6 hours', price: 'From $45', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=300&fit=crop', groupPricing: true, basePrice: 150 }
 			]
 		},
 		{
-			name: 'Jozani Forest',
+			name: 'Nakupenda Sandbank',
 			packages: [
-				{ name: 'Red Colobus Monkey Tour', duration: '6 hours', price: '$55', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop' },
-				{ name: 'Forest & Wildlife Day', duration: '1 day', price: '$110', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Nature Photography Safari', duration: '3 days', price: '$320', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop' },
-				{ name: 'Eco Adventure Package', duration: '5 days', price: '$520', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' }
+				{ name: 'Sandbank Day Trip', duration: '6 hours', price: 'From $45', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 170 }
 			]
 		},
 		{
 			name: 'Mnemba Snorkeling',
 			packages: [
-				{ name: 'Mnemba Snorkel Trip', duration: '6 hours', price: '$95', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Mnemba & Dolphin Tour', duration: '1 day', price: '$160', image: '/zanzibar.jpg' },
-				{ name: 'Marine Life Explorer', duration: '3 days', price: '$480', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Diving & Snorkel Package', duration: '5 days', price: '$750', image: '/zanzibar.jpg' }
+				{ name: 'Mnemba Snorkel Trip', duration: '6 hours', price: 'From $55', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 180 }
 			]
 		},
 		{
-			name: 'Culture Tour',
+			name: 'Spice Tour',
 			packages: [
-				{ name: 'Village Culture Visit', duration: '6 hours', price: '$50', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-				{ name: 'Cultural Immersion Day', duration: '1 day', price: '$100', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-				{ name: 'Heritage & Tradition Tour', duration: '3 days', price: '$300', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-				{ name: 'Cultural Discovery Package', duration: '5 days', price: '$480', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' }
+				{ name: 'Spice Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 120 }
 			]
 		},
 		{
-			name: 'Sunset Cruise',
+			name: 'Jozani Forest',
 			packages: [
-				{ name: 'Dhow Sunset Cruise', duration: '6 hours', price: '$65', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Sunset & Dinner Cruise', duration: '1 day', price: '$120', image: '/zanzibar.jpg' },
-				{ name: 'Romantic Sunset Package', duration: '3 days', price: '$360', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop' },
-				{ name: 'Sunset & Island Hopping', duration: '5 days', price: '$580', image: '/zanzibar.jpg' }
-			]
-		},
-		{
-			name: 'Blue Lagoon',
-			packages: [
-				{ name: 'Blue Lagoon Swimming', duration: '6 hours', price: '$70', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Blue Lagoon & Mangroves', duration: '1 day', price: '$130', image: '/zanzibar.jpg' },
-				{ name: 'Lagoon Adventure Tour', duration: '3 days', price: '$390', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Blue Lagoon Explorer', duration: '5 days', price: '$620', image: '/zanzibar.jpg' }
+				{ name: 'Jozani Forest Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop', groupPricing: true, basePrice: 130 }
 			]
 		},
 		{
 			name: 'Kizimkazi Dolphin',
 			packages: [
-				{ name: 'Dolphin Watching Tour', duration: '6 hours', price: '$80', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Dolphin Swimming Experience', duration: '1 day', price: '$150', image: '/zanzibar.jpg' },
-				{ name: 'Dolphin & Snorkel Adventure', duration: '3 days', price: '$450', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop' },
-				{ name: 'Marine Wildlife Package', duration: '5 days', price: '$720', image: '/zanzibar.jpg' }
+				{ name: 'Kizimkazi Dolphin Tour', duration: '6 hours', price: 'From $40', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 160 }
+				]
+		},
+		{
+			name: 'Sunset Cruise',
+			packages: [
+				{ name: 'Sunset Cruise', duration: '6 hours', price: 'From $30', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 110 }
 			]
 		},
 		{
-			name: 'Buggy/Quad Bike',
+			name: 'Blue Lagoon',
 			packages: [
-				{ name: 'Quad Bike Adventure', duration: '6 hours', price: '$90', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Buggy Island Tour', duration: '1 day', price: '$170', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Off-Road Explorer', duration: '3 days', price: '$500', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Adventure Sports Package', duration: '5 days', price: '$800', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' }
+				{ name: 'Blue Lagoon', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 110 }
+			]
+		},
+		{
+			name: 'Culture Tour',
+			packages: [
+				{ name: 'Culture Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop', groupPricing: true, basePrice: 150 }
+			]
+		},
+		{
+			name: 'The Rock Restaurant',
+			packages: [
+				{ name: 'The Rock Restaurant', duration: '6 hours', price: 'From $30', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 110 }
 			]
 		},
 		{
 			name: 'Salaam Cave',
 			packages: [
-				{ name: 'Cave Exploration Tour', duration: '6 hours', price: '$55', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Cave & Underground Adventure', duration: '1 day', price: '$105', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Spelunking Adventure', duration: '3 days', price: '$315', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' },
-				{ name: 'Cave Explorer Package', duration: '5 days', price: '$500', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop' }
+				{ name: 'Salaam Cave Tour', duration: '6 hours', price: 'From $30', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 120 }
+			]
+		},
+		{
+			name: 'Buggy/Quad Bike',
+			packages: [
+				{ name: 'Buggy/Quad Bike Adventure', duration: '6 hours', price: '$190', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 160 }
+				]
+		},
+		{
+			name: 'Stone town tour & spice tour',
+			packages: [
+				{ name: 'Stone town tour & spice tour', duration: '8 hours', price: 'From $50', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 110 }
+			]
+		},
+		{
+			name: 'Stone Town & Prison Island',
+			packages: [
+				{ name: 'Stone Town & Prison Island Tour', duration: '8 hours', price: 'From $60', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 220 }
+			]
+		},
+		{
+			name: 'Prison Island & Nakupenda',
+			packages: [
+				{ name: 'Prison Island & Nakupenda Tour', duration: '8 hours', price: 'From $50', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 240 }
+			]
+		},
+		{
+			name: 'Jozani & Spice',
+			packages: [
+				{ name: 'Jozani & Spice Tour', duration: '8 hours', price: 'From $40', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop', groupPricing: true, basePrice: 210 }
+			]
+		},
+		{
+			name: 'Jozani & The Rock',
+			packages: [
+				{ name: 'Jozani & The Rock Tour', duration: '8 hours', price: 'From $55', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop', groupPricing: true, basePrice: 240 }
+			]
+		},
+		{
+			name: 'The Rock & Salaam Cave',
+			packages: [
+				{ name: 'The Rock & Salaam Cave Tour', duration: '8 hours', price: 'From $40', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 240 }
+			]
+		},
+		{
+			name: 'Stone Town & Spice & Prison',
+			packages: [
+				{ name: 'Stone Town & Spice & Prison Tour', duration: '10 hours', price: 'From $120', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 370 }
 			]
 		}
 	];
@@ -137,15 +164,10 @@
 			</p>
 		</div>
 
-		{#each locations as location}
-			<div class="mb-12 md:mb-16">
-				<h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 md:mb-8 px-2">
-					{location.name}
-				</h2>
-				
-				<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-					{#each location.packages as pkg}
-						<div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-full">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+			{#each locations as location}
+				{#each location.packages as pkg}
+					<div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-full">
 							<div class="h-48 bg-gray-200 relative">
 								<img src={pkg.image} alt={pkg.name} class="w-full h-full object-cover" />
 								<div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -166,6 +188,162 @@
 									</span>
 								</p>
 								
+								{#if 'groupPricing' in pkg && pkg.groupPricing}
+									<div class="mb-3 text-xs text-gray-500">
+										<div class="text-center font-medium mb-2">Group Pricing (per person)</div>
+										<div class="grid grid-cols-2 gap-1 text-center">
+											{#if location.name === 'Stone Town'}
+												<div>1p: $140</div>
+												<div>2p: $100</div>
+												<div>3p: $70</div>
+												<div>4p: $60</div>
+												<div>5p: $50</div>
+												<div>6+p: $40</div>
+											{:else if location.name === 'Nakupenda Sandbank'}
+												<div>1p: $170</div>
+												<div>2p: $130</div>
+												<div>3p: $90</div>
+												<div>4p: $65</div>
+												<div>5p: $50</div>
+												<div>6+p: $45</div>
+											{:else if location.name === 'Safari Blue'}
+												<div>1p: $200</div>
+												<div>2p: $140</div>
+												<div>3p: $110</div>
+												<div>4p: $75</div>
+												<div>5p: $55</div>
+												<div>6+p: $50</div>
+											{:else if location.name === 'Spice Tour'}
+												<div>1p: $120</div>
+												<div>2p: $90</div>
+												<div>3p: $65</div>
+												<div>4p: $50</div>
+												<div>5p: $40</div>
+												<div>6+p: $35</div>
+											{:else if location.name === 'Prison Island'}
+												<div>1p: $150</div>
+												<div>2p: $110</div>
+												<div>3p: $70</div>
+												<div>4p: $60</div>
+												<div>5p: $55</div>
+												<div>6+p: $45</div>
+											{:else if location.name === 'Jozani Forest'}
+												<div>1p: $130</div>
+												<div>2p: $90</div>
+												<div>3p: $60</div>
+												<div>4p: $50</div>
+												<div>5p: $40</div>
+												<div>6+p: $35</div>
+											{:else if location.name === 'Mnemba Snorkeling'}
+												<div>1p: $180</div>
+												<div>2p: $140</div>
+												<div>3p: $90</div>
+												<div>4p: $70</div>
+												<div>5p: $60</div>
+												<div>6+p: $55</div>
+											{:else if location.name === 'Culture Tour'}
+												<div>1p: $150</div>
+												<div>2p: $110</div>
+												<div>3p: $70</div>
+												<div>4p: $50</div>
+												<div>5p: $45</div>
+												<div>6+p: $35</div>
+											{:else if location.name === 'Sunset Cruise'}
+												<div>1p: $110</div>
+												<div>2p: $90</div>
+												<div>3p: $60</div>
+												<div>4p: $50</div>
+												<div>5p: $40</div>
+												<div>6+p: $30</div>
+											{:else if location.name === 'Blue Lagoon'}
+												<div>1p: $110</div>
+												<div>2p: $110</div>
+												<div>3p: $65</div>
+												<div>4p: $40</div>
+												<div>5p: $40</div>
+												<div>6+p: $35</div>
+											{:else if location.name === 'Kizimkazi Dolphin'}
+												<div>1p: $160</div>
+												<div>2p: $160</div>
+												<div>3p: $80</div>
+												<div>4p: $65</div>
+												<div>5p: $60</div>
+												<div>6+p: $40</div>
+											{:else if location.name === 'Buggy/Quad Bike'}
+												<div>1p: $190</div>
+												<div>2p: $190</div>
+												<div>3p: $190</div>
+												<div>4p: $190</div>
+												<div>5p: $190</div>
+												<div>6+p: $190</div>
+											{:else if location.name === 'Salaam Cave'}
+												<div>1p: $120</div>
+												<div>2p: $90</div>
+												<div>3p: $60</div>
+												<div>4p: $40</div>
+												<div>5p: $40</div>
+												<div>6+p: $30</div>
+											{:else if location.name === 'The Rock Restaurant'}
+												<div>1p: $110</div>
+												<div>2p: $60</div>
+												<div>3p: $40</div>
+												<div>4p: $40</div>
+												<div>5p: $40</div>
+												<div>6+p: $30</div>
+											{:else if location.name === 'Stone town tour & spice tour'}
+												<div>1p: $230</div>
+												<div>2p: $120</div>
+												<div>3p: $80</div>
+												<div>4p: $70</div>
+												<div>5p: $55</div>
+												<div>6+p: $50</div>
+											{:else if location.name === 'Stone Town & Prison Island'}
+												<div>1p: $220</div>
+												<div>2p: $130</div>
+												<div>3p: $90</div>
+												<div>4p: $80</div>
+												<div>5p: $70</div>
+												<div>6+p: $60</div>
+											{:else if location.name === 'Prison Island & Nakupenda'}
+												<div>1p: $240</div>
+												<div>2p: $140</div>
+												<div>3p: $120</div>
+												<div>4p: $80</div>
+												<div>5p: $65</div>
+												<div>6+p: $50</div>
+											{:else if location.name === 'Stone Town & Spice & Prison'}
+												<div>1p: $370</div>
+												<div>2p: $310</div>
+												<div>3p: $270</div>
+												<div>4p: $230</div>
+												<div>5p: $160</div>
+												<div>6+p: $120</div>
+											{:else if location.name === 'Jozani & Spice'}
+												<div>1p: $210</div>
+												<div>2p: $120</div>
+												<div>3p: $90</div>
+												<div>4p: $70</div>
+												<div>5p: $55</div>
+												<div>6+p: $40</div>
+											{:else if location.name === 'Jozani & The Rock'}
+												<div>1p: $240</div>
+												<div>2p: $170</div>
+												<div>3p: $170</div>
+												<div>4p: $160</div>
+												<div>5p: $120</div>
+												<div>6+p: $55</div>
+											{:else if location.name === 'The Rock & Salaam Cave'}
+												<div>1p: $240</div>
+												<div>2p: $140</div>
+												<div>3p: $90</div>
+												<div>4p: $80</div>
+												<div>5p: $60</div>
+												<div>6+p: $40</div>
+											{/if}
+										</div>
+									</div>
+								{/if}
+								
 								<div class="flex gap-1 md:gap-2">
 									<button 
 										class="flex-1 bg-gray-100 text-gray-700 px-2 md:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium text-xs md:text-sm"
@@ -176,7 +354,7 @@
 									</button>
 									<button 
 										class="flex-1 bg-blue-600 text-white px-2 md:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-xs md:text-sm"
-										on:click={(e) => bookNow(e, location.name, pkg.name, pkg.price)}
+										on:click={(e) => bookNow(e, location.name, pkg.name, ('basePrice' in pkg && pkg.basePrice) ? `$${pkg.basePrice}` : pkg.price)}
 										type="button"
 									>
 										Book Now
@@ -185,8 +363,7 @@
 							</div>
 						</div>
 					{/each}
-				</div>
-			</div>
-		{/each}
+				{/each}
+		</div>
 	</div>
 </div>
