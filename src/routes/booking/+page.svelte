@@ -81,7 +81,7 @@
     if (locationParam && packageParam) {
       const locationName = locationParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       const packageName = packageParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-      booking.location = `${locationName} - ${packageName}`;
+      booking.location = `${packageName}`;
       packageType = packageName;
     }
   });
