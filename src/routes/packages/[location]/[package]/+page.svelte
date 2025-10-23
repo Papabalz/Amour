@@ -12,7 +12,6 @@
 				name: 'Stone Town Tour', 
 				duration: '6 hours', 
 				price: 'From $40', 
-
 				image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169340/DSC_0988_tvcoed.jpg", 
 				video: "https://res.cloudinary.com/ddsgcceuj/video/upload/v1761169367/LCBP7021_mierxq.mov",
 				description: 'Explore the historic Stone Town, a UNESCO World Heritage Site. Walk through narrow alleys, visit spice markets, see historical buildings, and learn about Zanzibar\'s rich cultural heritage. This tour offers group pricing - the more people in your group, the lower the price per person!', 
@@ -190,7 +189,7 @@
 			}
 		},
 		'kizimkazi-dolphin': {
-			'dolphin-watching-tour': { 
+			'kizimkazi-dolphin-tour': { 
 				name: 'Dolphin Watching Tour', 
 				duration: '6 hours', 
 				price: 'From $40', 
@@ -394,6 +393,12 @@
 	$: currentPackage = location && packageName ? packageData[location]?.[packageName] : null;
 	$: locationTitle = location?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
+	let showVideo = false;
+
+	function toggleMedia() {
+		showVideo = !showVideo;
+	}
+
 	function bookNow() {
 		const locationParam = location?.replace(/\s+/g, '-').toLowerCase();
 		const packageParam = packageName?.replace(/\s+/g, '-').toLowerCase();
@@ -404,13 +409,48 @@
 
 {#if currentPackage}
 <div class="min-h-screen bg-gray-50">
-	<div class="relative h-96 bg-cover bg-center" style="background-image: url('{currentPackage.image}')">
-		<div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+	<!-- Back Button -->
+	<div class="container mx-auto px-4 pt-8">
+		<button on:click={() => history.back()} class="flex items-center text-gray-600 hover:text-gray-800 mb-4">
+			<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+			</svg>
+			Back
+		</button>
+	</div>
+
+	<div class="relative h-96">
+		{#if showVideo && currentPackage.video}
+			<video class="w-full h-full object-cover" autoplay muted loop>
+				<source src={currentPackage.video} type="video/mp4">
+			</video>
+		{:else}
+			<div class="w-full h-full bg-cover bg-center" style="background-image: url('{currentPackage.image}')"></div>
+		{/if}
+		
+		<div class="absolute inset-0  bg-opacity-50 flex items-center justify-center">
 			<div class="text-center text-white">
 				<h1 class="text-4xl md:text-6xl font-bold mb-4">{currentPackage.name}</h1>
 				<p class="text-xl">{locationTitle}</p>
 			</div>
 		</div>
+		
+		{#if currentPackage.video}
+			<button 
+				on:click={toggleMedia}
+				class="absolute top-4 right-4 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+			>
+				{#if showVideo}
+					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+					</svg>
+				{:else}
+					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M8 5v14l11-7z"/>
+					</svg>
+				{/if}
+			</button>
+		{/if}
 	</div>
 
 	<div class="container mx-auto px-4 py-12">

@@ -156,6 +156,16 @@ $effect(() => {
 <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-8">
   <div class="container mx-auto px-4">
     <div class="max-w-4xl mx-auto">
+      <!-- Close Button -->
+      <div class="mb-6">
+        <button onclick={() => goto('/packages')} class="flex items-center text-gray-600 hover:text-gray-800">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Close
+        </button>
+      </div>
+      
       <div class="text-center mb-8">
         <h1 class="text-4xl font-bold text-gray-800 mb-2">{t.booking_title()}</h1>
         <p class="text-gray-600">Complete your booking details below</p>

@@ -155,6 +155,16 @@
 
 <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
 	<div class="container mx-auto px-4 py-8">
+		<!-- Home Button -->
+		<div class="mb-6">
+			<button onclick={() => goto('/')} class="flex items-center text-gray-600 hover:text-gray-800">
+				<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+				</svg>
+				Home
+			</button>
+		</div>
+		
 		<div class="text-center mb-8 md:mb-12">
 			<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4 px-2">
 				{t.zanzibar_experiences_title()}
@@ -347,14 +357,14 @@
 								<div class="flex gap-1 md:gap-2">
 									<button 
 										class="flex-1 bg-gray-100 text-gray-700 px-2 md:px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium text-xs md:text-sm"
-										on:click={() => navigateToPackage(location.name, pkg.name)}
+										onclick={() => navigateToPackage(location.name, pkg.name)}
 										type="button"
 									>
 										View Details
 									</button>
 									<button 
 										class="flex-1 bg-blue-600 text-white px-2 md:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-xs md:text-sm"
-										on:click={(e) => bookNow(e, location.name, pkg.name, ('basePrice' in pkg && pkg.basePrice) ? `$${pkg.basePrice}` : pkg.price)}
+										onclick={(e) => bookNow(e, location.name, pkg.name, ('basePrice' in pkg && pkg.basePrice) ? `$${pkg.basePrice}` : pkg.price)}
 										type="button"
 									>
 										Book Now
