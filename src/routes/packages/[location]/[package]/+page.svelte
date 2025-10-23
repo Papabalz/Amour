@@ -394,9 +394,21 @@
 	$: locationTitle = location?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
 	let showVideo = false;
+	let videoLoading = false;
+	let videoElement: HTMLVideoElement;
 
 	function toggleMedia() {
+		if (!showVideo) {
+			videoLoading = true;
+		}
 		showVideo = !showVideo;
+	}
+
+	function handleVideoLoad() {
+		videoLoading = false;
+		if (videoElement) {
+			videoElement.play();
+		}
 	}
 
 	function bookNow() {
@@ -410,22 +422,41 @@
 {#if currentPackage}
 <div class="min-h-screen bg-gray-50">
 	<!-- Back Button -->
-	<div class="container mx-auto px-4 pt-8">
-		<button on:click={() => history.back()} class="flex items-center text-gray-600 hover:text-gray-800 mb-4">
-			<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+	<div class="container absolute z-10 mx-auto px-4 pt-8 w-auto">
+		<button onclick={() => history.back()} class="flex items-center text-white hover:text-bold mb-4">
+			<svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
 			</svg>
 			Back
 		</button>
 	</div>
 
-	<div class="relative h-96">
+	<div class="relative h-96 overflow-hidden">
+		<!-- Background Image -->
+		<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-500" 
+			 class:opacity-0={showVideo && !videoLoading}
+			 style="background-image: url('{currentPackage.image}')"></div>
+		
+		<!-- Video -->
 		{#if showVideo && currentPackage.video}
-			<video class="w-full h-full object-cover" autoplay muted loop>
+			<video bind:this={videoElement} class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" 
+				 class:opacity-0={videoLoading}
+				 autoplay muted loop onloadeddata={handleVideoLoad} oncanplay={handleVideoLoad}>
 				<source src={currentPackage.video} type="video/mp4">
 			</video>
-		{:else}
-			<div class="w-full h-full bg-cover bg-center" style="background-image: url('{currentPackage.image}')"></div>
+		{/if}
+		
+		<!-- Loading Indicator -->
+		{#if videoLoading}
+			<div class="absolute inset-0  bg-opacity-50 flex items-center justify-center z-10">
+				<div class="text-white text-center">
+					<svg class="animate-spin w-8 h-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24">
+						<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+						<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+					</svg>
+					<p class="text-sm">Loading video...</p>
+				</div>
+			</div>
 		{/if}
 		
 		<div class="absolute inset-0  bg-opacity-50 flex items-center justify-center">
@@ -437,8 +468,8 @@
 		
 		{#if currentPackage.video}
 			<button 
-				on:click={toggleMedia}
-				class="absolute top-4 right-4 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
+				onclick={toggleMedia}
+				class="absolute top-4 right-4  bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all"
 			>
 				{#if showVideo}
 					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -509,7 +540,7 @@
 						</div>
 					</div>
 
-					<button on:click={bookNow} class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors duration-200">
+					<button onclick={bookNow} class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors duration-200">
 						{t.book_now()}
 					</button>
 
