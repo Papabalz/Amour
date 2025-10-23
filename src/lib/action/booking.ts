@@ -24,56 +24,56 @@ export async function getBookings() {
 export async function createBooking({request}: { request: Request}) {
   
     const bookingData = await request.formData();
- const userId = Number(bookingData.get('userId')) || null;
- const name = bookingData.get('name') as string;
- const email = bookingData.get('email') as string;
- const country = bookingData.get('country') as string;
- const phone = bookingData.get('phone') as string;
- const location = bookingData.get('location') as string;
- const numberOfDays = Number(bookingData.get('numberOfDays'));
- const adults = Number(bookingData.get('adults'));
- const childrenAges = bookingData.get('childrenAges') as string;
- const travelDate = bookingData.get('travelDate') as string;
- const pickup_location = bookingData.get('pickup_location') as string;
- const payment = bookingData.get('payment') as string;
- const moreInfo = bookingData.get('moreInfo') as string;
- const special_requests = bookingData.get('special_requests') as string;
+ const userId = Number(bookingData.get('userId'));
+ const guideType = bookingData.get('guideType') as string;
+const arriveDate = bookingData.get('arriveDate') as string;
+const departDate = bookingData.get('departDate') as string;
+const guests = Number(bookingData.get('guests'));
+const pickup_location = bookingData.get('pickup_location') as string   
+const status = bookingData.get('status') as string
+const payment = bookingData.get('payment') as string
+const moreInfo = bookingData.get('moreInfo') as string
+const special_requests = bookingData.get('special_requests') as string 
+const pickup_time = bookingData.get('pickup_time') as string
+const length_of_stay = bookingData.get('length_of_stay') as string
 
-if(!name) return fail(400, { message: 'Name is required', success: false });
-if(!email) return fail(400, { message: 'Email is required', success: false });
-if(!location) return fail(400, { message: 'Tour package is required', success: false });
-if(!travelDate) return fail(400, { message: 'Travel date is required', success: false });
+if(!guideType) return fail(400, { message: 'Guide type is required', success: false });
+if(!arriveDate) return fail(400, { message: 'Arrive date is required', success: false });
+if(!departDate) return fail(400, { message: 'Depart date is required', success: false });
+if(!guests) return fail(400, { message: 'Guests is required', success: false });
 if(!pickup_location) return fail(400, { message: 'Pickup location is required', success: false });
+if(!length_of_stay) return fail(400, { message: 'Length of stay is required', success: false });
     
+// console.log({userId, guideType, arriveDate, departDate, guests, pickup_location, status, payment, moreInfo, special_requests,pickup_time, length_of_stay})
+
     try {
       let data = await db.insert(booking).values({
             userId,
-            name,
-            email,
-            country,
-            phone,
-            location,
-            numberOfDays,
-            adults,
-            childrenAges,
-            travelDate,
+            guideType,
+            arriveDate,
+            departDate,
+            guests,
             pickup_location,
-            status: 'pending',
+            status,
             payment,
-            moreInfo: `${moreInfo}\nChildren: ${childrenAges}\nDuration: ${numberOfDays} days`,
+            moreInfo,
             special_requests,
+            pickup_time,
+            length_of_stay,
 }).returning();
 
 if (payment === 'pay_later'){
+
         return { message: 'Booking created successfully', status: 200, success: true };
 } else {
-    return {data, message: 'Booking created successfully', bookingData: { name, email, phone, country }};
+    return {data, message: 'Booking created successfully'};
 }
+
 
     } catch (error) {
         console.error('Error creating booking:', error);
-        console.error('Booking data:', { userId, name, email, country, phone, location, numberOfDays, adults, childrenAges, travelDate, pickup_location, payment, moreInfo, special_requests });
-        return fail(401, { message: `Failed to create booking: ${error}`, success: false });
+        return fail(401, { message: 'Failed to create booking', success: false });
+
     }
    
 }

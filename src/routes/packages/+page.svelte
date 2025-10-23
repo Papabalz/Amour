@@ -1,11 +1,6 @@
 <script lang="ts">
 	import * as t from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
-	import stone_town from '/src/images/stone_town/stone-town1.jpg';
-	import dolphin from '/src/images/dolphin/dolphin.jpg';
-	import prison from '/src/images/prison_island/prison.jpg';
-	import salaam from '/src/images/salaam/salaam4.jpg';
-	
 
 	function navigateToPackage(locationName: string, packageName: string) {
 		const locationSlug = locationName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -38,13 +33,13 @@
 		{
 			name: 'Stone Town',
 			packages: [
-				{ name: 'Stone Town Tour', duration: '6 hours', price: 'From $40', image: stone_town, groupPricing: true, basePrice: 140 }
+				{ name: 'Stone Town Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169340/DSC_0988_tvcoed.jpg", groupPricing: true, basePrice: 140 }
 			]
 		},
 		{
 			name: 'Prison Island',
 			packages: [
-				{ name: 'Prison Island Tour', duration: '6 hours', price: 'From $45', image: prison, groupPricing: true, basePrice: 150 }
+				{ name: 'Prison Island Tour', duration: '6 hours', price: 'From $45', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=300&fit=crop', groupPricing: true, basePrice: 150 }
 			]
 		},
 		{
@@ -74,7 +69,7 @@
 		{
 			name: 'Kizimkazi Dolphin',
 			packages: [
-				{ name: 'Kizimkazi Dolphin Tour', duration: '6 hours', price: 'From $40', image: dolphin, groupPricing: true, basePrice: 160 }
+				{ name: 'Kizimkazi Dolphin Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp", groupPricing: true, basePrice: 160 }
 				]
 		},
 		{
@@ -104,7 +99,7 @@
 		{
 			name: 'Salaam Cave',
 			packages: [
-				{ name: 'Salaam Cave Tour', duration: '6 hours', price: 'From $30', image: salaam, groupPricing: true, basePrice: 120 }
+				{ name: 'Salaam Cave Tour', duration: '6 hours', price: 'From $30', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761168723/_ADM3854_ys3num.jpg", groupPricing: true, basePrice: 120 }
 			]
 		},
 		{
@@ -160,14 +155,6 @@
 
 <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
 	<div class="container mx-auto px-4 py-8">
-		<div class="mb-6">
-			<a href="/" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-				<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-				</svg>
-				Back to Home
-			</a>
-		</div>
 		<div class="text-center mb-8 md:mb-12">
 			<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4 px-2">
 				{t.zanzibar_experiences_title()}

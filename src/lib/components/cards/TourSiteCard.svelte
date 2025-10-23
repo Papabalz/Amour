@@ -1,18 +1,13 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { m as t } from '$lib/paraglide/messages.js';
-	import stone_town from '/src/images/stone_town/stone-town1.jpg';
-	import dolphin from '/src/images/dolphin/dolphin.jpg';
-	import prison from '/src/images/prison_island/prison.jpg';
-	import salaam from '/src/images/salaam/salaam4.jpg';
-	
 
 	const tourAreaData = [
 		{
 			id: 1,
 			name: 'Stone Town',
 			details: t.stone_town_details(),
-			picture: stone_town
+			picture: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169340/DSC_0988_tvcoed.jpg"
 		},
 		{
 			id: 2,
@@ -21,73 +16,73 @@
 			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 3,
+			id: 2,
 			name: 'Safari Blue',
 			details: t.safari_blue_details(),
 			picture: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 4,
+			id: 3,
 			name: 'Spice Tour',
 			details: t.spice_tour_details(),
 			picture: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 5,
+			id: 4,
 			name: 'Prison Island',
 			details: t.prison_island_details(),
-			picture: prison
+			picture: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169109/DSC_1144_x7nqfp.jpg'
 		},
 		{
-			id: 6,
+			id: 5,
 			name: 'Jozani Forest',
 			details: t.jozani_forest_details(),
 			picture: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 7,
+			id: 6,
 			name: 'Snorkel at Mnemba',
 			details: t.mnemba_snorkel_details(),
 			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 8,
+			id: 7,
 			name: 'Culture Tour',
 			details: t.culture_tour_details(),
 			picture: 'https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 9,
+			id: 8,
 			name: 'Sunset Cruise',
 			details: t.sunset_cruise_details(),
 			picture: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 10,
+			id: 9,
 			name: 'Blue Lagoon',
 			details: t.blue_lagoon_details(),
 			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 11,
+			id: 10,
 			name: 'Kizimkazi Dolphin',
 			details: t.kizimkazi_dolphin_details(),
-			picture: dolphin
+			picture: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp"
 		},
 		{
-			id: 12,
+			id: 11,
 			name: 'Buggy/Quad Bike',
 			details: t.buggy_quad_details(),
 			picture: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&auto=format&fit=crop&q=60'
 		},
 		{
-			id: 13,
+			id: 12,
 			name: 'Salaam Cave',
 			details: t.salaam_cave_details(),
-			picture: salaam
+			picture: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761168723/_ADM3854_ys3num.jpg"
 		},
 		{
-			id: 14,
+			id: 13,
 			name: 'The Rock Restaurant',
 			details: t.rock_restaurant_details(),
 			picture: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&auto=format&fit=crop&q=60'
