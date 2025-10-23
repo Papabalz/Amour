@@ -18,7 +18,6 @@ export const booking = pgTable('booking', {
 
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
-		.notNull()
 		.references(() => user.id, { onDelete: 'cascade' }),
 	name: text('name').notNull(),
 	email: text('email').notNull(),

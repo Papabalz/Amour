@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { goto } from "$app/navigation";
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import useShowalert from "$lib/alert/useAlert";
 	import type { User } from "$lib/server/db/schema";
 	import type { ActionData } from "./$types";
@@ -74,7 +74,7 @@
   }
   
   $effect(() => {
-    const urlParams = new URLSearchParams($page.url.search);
+    const urlParams = new URLSearchParams(page.url.search);
     const locationParam = urlParams.get('location');
     const packageParam = urlParams.get('package');
     
@@ -113,6 +113,7 @@
   function handlePaymentSubmit(event: Event) {
     const input = event.currentTarget as HTMLInputElement;
     booking.payment = input.value;
+    console.log('Payment method selected:', booking.payment);
     if (formElement) {
       isLoading = true;
       formElement.requestSubmit();
@@ -121,10 +122,9 @@
 
 const { alert, showAlert} = useShowalert();
 
-
-
 $effect(() => {
   if (form) {
+    console.log('Form response received:', form);
     isLoading = false;
     (document.getElementById('my_modal_2') as HTMLDialogElement)?.close();
     
@@ -137,7 +137,41 @@ $effect(() => {
       alert.success = form.success;
       showAlert("");
     } else if (form.data?.[0]?.id) {
-      showAlert(`/payment/${form.data[0].id}?totalPrice=${totalPrice}`);
+      const bookingId = form.data[0].id;
+      console.log('Booking created with ID:', bookingId, 'Payment method:', booking.payment);
+      if (booking.payment === 'pay_now') {
+        console.log('Redirecting to Pesapal...');
+        // Redirect to Pesapal payment
+        const pesapalForm = document.createElement('form');
+        pesapalForm.method = 'POST';
+        pesapalForm.action = '/pesapal';
+        
+        // Store current totalPrice to avoid it becoming 0
+        const currentTotal = totalPrice || dailyPrice * Number(booking.numberOfDays || 1);
+        
+        const fields = {
+          bookingId: bookingId.toString(),
+          amount: currentTotal.toString(),
+          email: form.bookingData?.email || booking.email,
+          phone: form.bookingData?.phone || booking.phone,
+          name: form.bookingData?.name || booking.name,
+          country: form.bookingData?.country || booking.country,
+          totalPrice: currentTotal.toString()
+        };
+        
+        console.log('Pesapal form data:', fields);
+        
+        Object.entries(fields).forEach(([key, value]) => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = value;
+          pesapalForm.appendChild(input);
+        });
+        
+        document.body.appendChild(pesapalForm);
+        pesapalForm.submit();
+      }
     }
   }
 });
@@ -269,6 +303,8 @@ $effect(() => {
               {/if}
               
               <input id="userId" type="hidden" name="userId" value={booking.userId} />
+              <input type="hidden" name="payment" bind:value={booking.payment} />
+              <input type="hidden" name="totalPrice" value={totalPrice} />
             </div>
           </div>
 
@@ -331,6 +367,7 @@ $effect(() => {
     </div>
   </div>
 </div>
+
 <dialog id="my_modal_2" class="modal">
   <div class="modal-box max-w-md">
     <h3 class="text-xl font-bold text-gray-800 mb-4">{t.booking_modal_hello()}{data?.user?.name?.replace(/\b\w/g, (i) => i.toUpperCase())}</h3>
@@ -357,7 +394,7 @@ $effect(() => {
         <input type="radio" name="payment" value="pay_now" class="mr-3" onchange={handlePaymentSubmit} />
         <div>
           <div class="font-medium text-gray-800">{t.booking_modal_pay_now()}</div>
-          <div class="text-sm text-gray-500">Secure online payment</div>
+          <div class="text-sm text-gray-500">Pay with Pesapal - Mobile money, cards & bank transfers</div>
         </div>
       </label>
     </div>
@@ -370,7 +407,6 @@ $effect(() => {
     </button>
   </div>
 </dialog>
-
 
 <div>
   {#if form?.success === true}

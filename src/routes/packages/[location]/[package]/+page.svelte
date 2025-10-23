@@ -1,10 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import * as t from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
+	import stone_town from '/src/images/stone_town/stone-town1.jpg';
+	import stone_town_vid from '/src/images/stone_town/stone-town-vid1.mp4';
+	import dolphin from '/src/images/dolphin/dolphin.jpg';
+	import dolphin_vid from '/src/images/dolphin/dolphin-vid.mp4';
+	import prison from '/src/images/prison_island/prison.jpg';
+	import salaam from '/src/images/salaam/salaam4.jpg';
+	import salaam_vid from '/src/images/salaam/salaam-vid.mov';
 
-	$: location = $page.params.location;
-	$: packageName = $page.params.package;
+
+	function goBack() {
+		history.back();
+	}
+
+	$: location = page.params.location;
+	$: packageName = page.params.package;
 
 	const packageData: Record<string, Record<string, any>> = {
 		'stone-town': {
@@ -12,7 +24,8 @@
 				name: 'Stone Town Tour', 
 				duration: '6 hours', 
 				price: 'From $40', 
-				image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=400&fit=crop', 
+				image: stone_town, 
+				video: stone_town_vid,
 				description: 'Explore the historic Stone Town, a UNESCO World Heritage Site. Walk through narrow alleys, visit spice markets, see historical buildings, and learn about Zanzibar\'s rich cultural heritage. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Professional local guide', 'Walking tour of Stone Town', 'Visit to spice markets', 'Historical sites tour', 'Cultural insights', 'Photo opportunities', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
 				groupPricing: {
@@ -84,7 +97,7 @@
 				name: 'Prison Island Tour', 
 				duration: '6 hours', 
 				price: 'From $45', 
-				image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&h=400&fit=crop', 
+				image: prison, 
 				description: 'Visit the historic Prison Island (Changuu Island) and meet the famous giant tortoises. Explore the old prison ruins, learn about the island\'s fascinating history, enjoy snorkeling in crystal clear waters, and relax on pristine beaches. This half-day adventure combines history, wildlife, and marine activities. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Boat transfer to Prison Island', 'Giant tortoise encounter', 'Historical site tour', 'Snorkeling equipment', 'Beach time and swimming', 'Professional guide', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
 				groupPricing: {
@@ -188,11 +201,12 @@
 			}
 		},
 		'kizimkazi-dolphin': {
-			'dolphin-watching-tour': { 
+			'kizimkazi-dolphin-tour': { 
 				name: 'Dolphin Watching Tour', 
 				duration: '6 hours', 
 				price: 'From $40', 
-				image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=400&fit=crop', 
+				image: dolphin, 
+				video: dolphin_vid,
 				description: 'Experience the thrill of encountering wild dolphins in their natural habitat at Kizimkazi. This unforgettable marine adventure takes you to the southern coast of Zanzibar where bottlenose and spinner dolphins are frequently spotted. Enjoy boat rides through pristine waters, witness playful dolphins jumping and swimming alongside the boat, and learn about marine conservation efforts. The tour includes opportunities for swimming and snorkeling in crystal clear waters. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Boat transfer to dolphin spotting areas', 'Professional marine guide', 'Dolphin watching experience', 'Swimming and snorkeling opportunities', 'Marine life education', 'Safety equipment provided', 'Transport to/from hotel', 'Fees included', 'Photo opportunities'],
 				groupPricing: {
@@ -228,7 +242,8 @@
 				name: 'Salaam Cave Tour', 
 				duration: '6 hours', 
 				price: 'From $30', 
-				image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop', 
+				image: salaam, 
+				video: salaam_vid,
 				description: 'Explore the mysterious Salaam Cave, a hidden underground wonder in Zanzibar. This adventurous tour takes you through ancient limestone formations, underground chambers, and natural rock formations that have been carved by nature over thousands of years. Discover the geological history of the island while experiencing the thrill of cave exploration. Professional guides provide safety equipment and share fascinating insights about the cave\'s formation and local legends. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Professional cave guide', 'Safety equipment and helmets', 'Cave exploration experience', 'Geological education', 'Photography opportunities', 'Local legends and stories', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
 				groupPricing: {
@@ -387,8 +402,21 @@
 		}
 	};
 
-	$: currentPackage = packageData[location]?.[packageName];
+	let isVideoPlaying = false;
+	let videoElement: HTMLVideoElement;
+
+	$: currentPackage = location && packageName ? packageData[location]?.[packageName] : null;
 	$: locationTitle = location?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+	function toggleVideo() {
+		if (isVideoPlaying) {
+			videoElement?.pause();
+			isVideoPlaying = false;
+		} else {
+			videoElement?.play();
+			isVideoPlaying = true;
+		}
+	}
 
 	function bookNow() {
 		const locationParam = location?.replace(/\s+/g, '-').toLowerCase();
@@ -400,8 +428,53 @@
 
 {#if currentPackage}
 <div class="min-h-screen bg-gray-50">
-	<div class="relative h-96 bg-cover bg-center" style="background-image: url('{currentPackage.image}')">
-		<div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+	<div class="relative h-96 overflow-hidden">
+		<!-- Background Image -->
+		<div class="absolute inset-0 bg-cover bg-no-repeat w-full h-full bg-center transition-opacity duration-500" 
+			 class:opacity-0={isVideoPlaying} 
+			 style="background-image: url({currentPackage.image})"></div>
+		
+		<!-- Background Video -->
+		{#if currentPackage.video}
+			<video 
+				bind:this={videoElement}
+				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+				class:opacity-0={!isVideoPlaying}
+				muted
+				loop
+				playsinline>
+				<source src={currentPackage.video} type="video/mp4">
+			</video>
+		{/if}
+		
+		<div class="absolute top-4 left-4 z-10">
+			<button on:click={goBack} class="bg-black bg-opacity-50 hover:bg-opacity-70 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+				</svg>
+				Back
+			</button>
+		</div>
+		
+		<!-- Video Toggle Button -->
+		{#if currentPackage.video}
+			<div class="absolute top-4 right-4 z-10">
+				<button on:click={toggleVideo} class=" bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all">
+					{#if isVideoPlaying}
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h4v16H6V4zM14 4h4v16h-4V4z"></path>
+						</svg>
+					{:else}
+						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M15 14h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5v14l11-7z"></path>
+						</svg>
+					{/if}
+				</button>
+			</div>
+		{/if}
+		
+		<div class="absolute inset-0 bg-opacity-50 flex items-center justify-center">
 			<div class="text-center text-white">
 				<h1 class="text-4xl md:text-6xl font-bold mb-4">{currentPackage.name}</h1>
 				<p class="text-xl">{locationTitle}</p>
