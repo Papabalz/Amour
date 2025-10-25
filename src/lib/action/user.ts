@@ -4,6 +4,7 @@ import { eq } from 'drizzle-orm';
 import { fail, json, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 import { createSession } from '$lib/server/session';
+import { sendWelcomeEmail } from '$lib/email/mailer';
 
 
 export const createUser = async ({ request }: { request: Request }) => {
@@ -37,6 +38,9 @@ export const createUser = async ({ request }: { request: Request }) => {
     try {
 
         await db.insert(user).values({email, name, password: hashedPassword, nationality, phone_number});
+
+        // Send welcome email
+        await sendWelcomeEmail({ name, email });
 
         return { message: 'User created successfully', status: 302, success: true };
         

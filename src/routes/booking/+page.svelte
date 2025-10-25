@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { goto } from "$app/navigation";
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import useShowalert from "$lib/alert/useAlert";
 	import type { User } from "$lib/server/db/schema";
 	import type { ActionData } from "./$types";
@@ -26,7 +26,6 @@
     numberOfDays: 1,
     adults: 1,
     childrenAges: '',
-    guideType: '',
     guests: 1,
     status: 'pending',
     isPaid: false,
@@ -53,7 +52,7 @@
       'Culture Tour': { 1: 150, 2: 110, 3: 70, 4: 50, 5: 45, '6+': 35 },
       'Sunset Cruise': { 1: 110, 2: 90, 3: 60, 4: 50, 5: 40, '6+': 30 },
       'Blue Lagoon': { 1: 110, 2: 110, 3: 65, 4: 40, 5: 40, '6+': 35 },
-      'Kizimkazi Dolphin Tour': { 1: 160, 2: 160, 3: 80, 4: 65, 5: 60, '6+': 40 },
+      'Dolphin Tour': { 1: 160, 2: 160, 3: 80, 4: 65, 5: 60, '6+': 40 },
       'Buggy/Quad Bike Adventure': { 1: 190, 2: 190, 3: 190, 4: 190, 5: 190, '6+': 190 },
       'Salaam Cave Tour': { 1: 120, 2: 90, 3: 60, 4: 40, 5: 40, '6+': 30 },
       'The Rock Restaurant': { 1: 110, 2: 60, 3: 40, 4: 40, 5: 40, '6+': 30 },
@@ -74,7 +73,7 @@
   }
   
   $effect(() => {
-    const urlParams = new URLSearchParams($page.url.search);
+    const urlParams = new URLSearchParams(page.url.search);
     const locationParam = urlParams.get('location');
     const packageParam = urlParams.get('package');
     

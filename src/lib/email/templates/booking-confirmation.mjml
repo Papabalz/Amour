@@ -1,0 +1,74 @@
+<mjml>
+  <mj-head>
+    <mj-title>Booking Confirmation - Amour Tours</mj-title>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-image width="200px" src="https://via.placeholder.com/200x80/0066cc/ffffff?text=Amour+Tours" alt="Amour Tours" />
+        <mj-text font-size="24px" color="#333333" align="center" font-weight="bold">
+          Booking Confirmation
+        </mj-text>
+        <mj-text font-size="16px" color="#666666" align="center">
+          Thank you for choosing Amour Tours, {{name}}!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-text font-size="18px" color="#333333" font-weight="bold">
+          Booking Details
+        </mj-text>
+        <mj-table>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Tour Package:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{location}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Travel Date:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{travelDate}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Duration:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{numberOfDays}} day(s)</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Adults:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{adults}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Pickup Location:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{pickup_location}}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Payment Method:</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid #eee;">{{payment}}</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#0066cc" padding="20px">
+      <mj-column>
+        <mj-text color="#ffffff" align="center" font-size="16px">
+          We'll contact you soon to confirm your booking details.
+        </mj-text>
+        <mj-button background-color="#ffffff" color="#0066cc" href="mailto:info@amourtours.com">
+          Contact Us
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#f8f8f8" padding="20px">
+      <mj-column>
+        <mj-text font-size="12px" color="#666666" align="center">
+          © 2024 Amour Tours. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

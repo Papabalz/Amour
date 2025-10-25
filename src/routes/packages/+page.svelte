@@ -39,13 +39,13 @@
 		{
 			name: 'Prison Island',
 			packages: [
-				{ name: 'Prison Island Tour', duration: '6 hours', price: 'From $45', image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400&h=300&fit=crop', groupPricing: true, basePrice: 150 }
+				{ name: 'Prison Island Tour', duration: '6 hours', price: 'From $45', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169109/DSC_1144_x7nqfp.jpg', groupPricing: true, basePrice: 150 }
 			]
 		},
 		{
 			name: 'Nakupenda Sandbank',
 			packages: [
-				{ name: 'Sandbank Day Trip', duration: '6 hours', price: 'From $45', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', groupPricing: true, basePrice: 170 }
+				{ name: 'Nakupenda Sandbank Trip', duration: '6 hours', price: 'From $45', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg', groupPricing: true, basePrice: 170 }
 			]
 		},
 		{
@@ -67,9 +67,9 @@
 			]
 		},
 		{
-			name: 'Kizimkazi Dolphin',
+			name: 'Dolphin',
 			packages: [
-				{ name: 'Kizimkazi Dolphin Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp", groupPricing: true, basePrice: 160 }
+				{ name: 'Dolphin Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp", groupPricing: true, basePrice: 160 }
 				]
 		},
 		{
@@ -272,7 +272,7 @@
 												<div>4p: $40</div>
 												<div>5p: $40</div>
 												<div>6+p: $35</div>
-											{:else if location.name === 'Kizimkazi Dolphin'}
+											{:else if location.name === 'Dolphin'}
 												<div>1p: $160</div>
 												<div>2p: $160</div>
 												<div>3p: $80</div>

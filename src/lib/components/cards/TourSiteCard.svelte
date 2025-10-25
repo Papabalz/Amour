@@ -13,7 +13,7 @@
 			id: 2,
 			name: 'Nakupenda Sandbank',
 			details: t.nakupenda_details(),
-			picture: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&auto=format&fit=crop&q=60'
+			picture: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg'
 		},
 		{
 			id: 3,
@@ -65,7 +65,7 @@
 		},
 		{
 			id: 11,
-			name: 'Kizimkazi Dolphin',
+			name: 'Dolphin',
 			details: t.kizimkazi_dolphin_details(),
 			picture: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp"
 		},

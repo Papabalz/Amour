@@ -1,0 +1,60 @@
+<mjml>
+  <mj-head>
+    <mj-title>Welcome to Amour Tours</mj-title>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-image width="200px" src="https://via.placeholder.com/200x80/0066cc/ffffff?text=Amour+Tours" alt="Amour Tours" />
+        <mj-text font-size="28px" color="#333333" align="center" font-weight="bold">
+          Welcome to Amour Tours!
+        </mj-text>
+        <mj-text font-size="18px" color="#666666" align="center">
+          Hello {{name}}, thank you for joining us!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-text font-size="16px" color="#333333" line-height="24px">
+          We're excited to have you as part of the Amour Tours family. Your account has been successfully created and you're now ready to explore the beautiful experiences Zanzibar has to offer.
+        </mj-text>
+        <mj-text font-size="16px" color="#333333" line-height="24px">
+          With your account, you can:
+        </mj-text>
+        <mj-text font-size="14px" color="#555555" line-height="22px">
+          • Browse and book amazing tour packages<br/>
+          • Manage your bookings easily<br/>
+          • Get exclusive offers and updates<br/>
+          • Access personalized recommendations
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#0066cc" padding="20px">
+      <mj-column>
+        <mj-text color="#ffffff" align="center" font-size="18px" font-weight="bold">
+          Ready to start your adventure?
+        </mj-text>
+        <mj-button background-color="#ffffff" color="#0066cc" href="https://amourtours.com/packages">
+          Explore Tours
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#f8f8f8" padding="20px">
+      <mj-column>
+        <mj-text font-size="12px" color="#666666" align="center">
+          If you have any questions, feel free to contact us at info@amourtours.com
+        </mj-text>
+        <mj-text font-size="12px" color="#666666" align="center">
+          © 2024 Amour Tours. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
