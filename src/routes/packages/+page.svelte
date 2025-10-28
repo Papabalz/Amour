@@ -25,12 +25,6 @@
 	
 	const locations = [
 		{
-			name: 'Safari Blue',
-			packages: [
-				{ name: 'Safari Blue Tour', duration: 'Full day', price: 'From $50', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 200 }
-			]
-		},
-		{
 			name: 'Stone Town',
 			packages: [
 				{ name: 'Stone Town Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169340/DSC_0988_tvcoed.jpg", groupPricing: true, basePrice: 140 }
@@ -45,8 +39,32 @@
 		{
 			name: 'Nakupenda Sandbank',
 			packages: [
-				{ name: 'Nakupenda Sandbank Trip', duration: '6 hours', price: 'From $45', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg', groupPricing: true, basePrice: 170 }
+				{ name: 'Nakupenda Sandbank Trip', duration: '6 hours', price: 'From $45', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614240/pexels-dajana-reci-289671698-30125137_hdqobm.jpg', groupPricing: true, basePrice: 170 }
 			]
+		},
+		{
+			name: 'Jozani Forest',
+			packages: [
+				{ name: 'Jozani Forest Tour', duration: '6 hours', price: 'From $35', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614388/jozani_1_tn3pob.jpg', groupPricing: true, basePrice: 130 }
+			]
+		},
+		{
+			name: 'Salaam Cave',
+			packages: [
+				{ name: 'Salaam Cave Tour', duration: '6 hours', price: 'From $30', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761168723/_ADM3854_ys3num.jpg", groupPricing: true, basePrice: 120 }
+			]
+		},
+		{
+			name: 'The Rock Restaurant',
+			packages: [
+				{ name: 'The Rock Restaurant', duration: '6 hours', price: 'From $30', image: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614435/rock_restaurant_bgbc1f.jpg', groupPricing: true, basePrice: 110 }
+			]
+		},
+		{
+			name: 'Dolphin',
+			packages: [
+				{ name: 'Dolphin Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp", groupPricing: true, basePrice: 160 }
+				]
 		},
 		{
 			name: 'Mnemba Snorkeling',
@@ -55,22 +73,16 @@
 			]
 		},
 		{
+			name: 'Safari Blue',
+			packages: [
+				{ name: 'Safari Blue Tour', duration: 'Full day', price: 'From $50', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 200 }
+			]
+		},
+		{
 			name: 'Spice Tour',
 			packages: [
 				{ name: 'Spice Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', groupPricing: true, basePrice: 120 }
 			]
-		},
-		{
-			name: 'Jozani Forest',
-			packages: [
-				{ name: 'Jozani Forest Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=300&fit=crop', groupPricing: true, basePrice: 130 }
-			]
-		},
-		{
-			name: 'Dolphin',
-			packages: [
-				{ name: 'Dolphin Tour', duration: '6 hours', price: 'From $40', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169503/DIYP0607_kdxuvk.webp", groupPricing: true, basePrice: 160 }
-				]
 		},
 		{
 			name: 'Sunset Cruise',
@@ -88,18 +100,6 @@
 			name: 'Culture Tour',
 			packages: [
 				{ name: 'Culture Tour', duration: '6 hours', price: 'From $35', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop', groupPricing: true, basePrice: 150 }
-			]
-		},
-		{
-			name: 'The Rock Restaurant',
-			packages: [
-				{ name: 'The Rock Restaurant', duration: '6 hours', price: 'From $30', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop', groupPricing: true, basePrice: 110 }
-			]
-		},
-		{
-			name: 'Salaam Cave',
-			packages: [
-				{ name: 'Salaam Cave Tour', duration: '6 hours', price: 'From $30', image: "https://res.cloudinary.com/ddsgcceuj/image/upload/v1761168723/_ADM3854_ys3num.jpg", groupPricing: true, basePrice: 120 }
 			]
 		},
 		{

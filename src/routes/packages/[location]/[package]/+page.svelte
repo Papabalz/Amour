@@ -32,8 +32,10 @@
 					"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291532/DSC_1085_pbc5po.jpg",
 					"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291530/DSC_1065_b8nqu5.jpg",
 					"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291529/DSC_0993_uonvbj.jpg",
-					"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291529/DSC_1009_xtomel.jpg"
-				],
+					"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291529/DSC_1009_xtomel.jpg",
+				"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614280/pexels-meddybates-13675820_uwcaxp.jpg",
+				"https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614279/morgan-nott-rMQ31IQg4Io-unsplash_tgqoen.jpg"
+			],
 				video: "https://res.cloudinary.com/ddsgcceuj/video/upload/v1761169367/LCBP7021_mierxq.mov",
 				description: 'Explore the historic Stone Town, a UNESCO World Heritage Site. Walk through narrow alleys, visit spice markets, see historical buildings, and learn about Zanzibar\'s rich cultural heritage. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Professional local guide', 'Walking tour of Stone Town', 'Visit to spice markets', 'Historical sites tour', 'Cultural insights', 'Photo opportunities', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
@@ -53,10 +55,10 @@
 				duration: '6 hours', 
 				price: 'From $45', 
 				images: [
-					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614240/pexels-dajana-reci-289671698-30125137_hdqobm.jpg',
 					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291990/FEGH6196_gjzkv0.webp',
 					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291986/DSC_1219_wme744.jpg',
-					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291984/DSC_1215_axmhj3.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614238/pexels-keeganjchecks-29889187_bwmxbw.jpg',
 					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291988/DSC_1227_cv44cx.jpg'
 				], 
 				description: 'Experience the pristine beauty of Nakupenda Sandbank, a stunning white sand island surrounded by crystal clear turquoise waters. Enjoy swimming, snorkeling, and relaxing on this tropical paradise. This tour offers group pricing - the more people in your group, the lower the price per person!', 
@@ -68,6 +70,30 @@
 					4: 65,
 					5: 50,
 					'6+': 45
+				}
+			}
+		},
+		'jozani-forest': {
+			'jozani-forest-tour': { 
+				name: 'Jozani Forest Tour', 
+				duration: '6 hours', 
+				price: 'From $35', 
+				images: [
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614388/jozani_1_tn3pob.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614390/jozani_3_x6n4zj.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614396/jozani_5_zfjw0b.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614393/jozani_4_zekshx.jpg',
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614396/jozani_6_woiciq.jpg'
+				], 
+				description: 'Explore the enchanting Jozani Forest, home to the rare Red Colobus monkeys found only in Zanzibar. Walk through lush mangrove boardwalks, discover unique flora and fauna, and learn about conservation efforts. This nature adventure offers incredible wildlife photography opportunities and insights into Zanzibar\'s natural heritage. This tour offers group pricing - the more people in your group, the lower the price per person!', 
+				includes: ['Jozani Forest guided tour', 'Red Colobus monkey viewing', 'Mangrove boardwalk experience', 'Nature photography opportunities', 'Conservation education', 'Professional naturalist guide', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
+				groupPricing: {
+					1: 130,
+					2: 90,
+					3: 60,
+					4: 50,
+					5: 40,
+					'6+': 35
 				}
 			}
 		},
@@ -141,30 +167,6 @@
 					4: 60,
 					5: 55,
 					'6+': 45
-				}
-			}
-		},
-		'jozani-forest': {
-			'jozani-forest-tour': { 
-				name: 'Jozani Forest Tour', 
-				duration: '6 hours', 
-				price: 'From $35', 
-				images: [
-					'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&h=400&fit=crop'
-				], 
-				description: 'Explore the enchanting Jozani Forest, home to the rare Red Colobus monkeys found only in Zanzibar. Walk through lush mangrove boardwalks, discover unique flora and fauna, and learn about conservation efforts. This nature adventure offers incredible wildlife photography opportunities and insights into Zanzibar\'s natural heritage. This tour offers group pricing - the more people in your group, the lower the price per person!', 
-				includes: ['Jozani Forest guided tour', 'Red Colobus monkey viewing', 'Mangrove boardwalk experience', 'Nature photography opportunities', 'Conservation education', 'Professional naturalist guide', 'Transport to/from hotel', 'Fees included', 'Refreshments provided'],
-				groupPricing: {
-					1: 130,
-					2: 90,
-					3: 60,
-					4: 50,
-					5: 40,
-					'6+': 35
 				}
 			}
 		},
@@ -346,11 +348,8 @@
 				duration: '6 hours', 
 				price: 'From $30', 
 				images: [
-					'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=400&fit=crop',
-					'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop'
+					'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614435/rock_restaurant_bgbc1f.jpg',
+					
 				], 
 				description: 'Experience the iconic Rock Restaurant, one of Zanzibar\'s most famous dining destinations. Perched on a rock in the Indian Ocean, this unique restaurant offers spectacular ocean views and fresh seafood cuisine. Accessible only during low tide by foot or by boat during high tide, dining here is truly a once-in-a-lifetime experience. Enjoy gourmet meals while surrounded by crystal clear waters and stunning coastal scenery. This tour offers group pricing - the more people in your group, the lower the price per person!', 
 				includes: ['Transport to The Rock Restaurant', 'Boat transfer if needed (high tide)', 'Reserved dining table', 'Ocean view dining experience', 'Fresh seafood specialties', 'Professional service', 'Photography opportunities', 'Return transport', 'Service charges included'],

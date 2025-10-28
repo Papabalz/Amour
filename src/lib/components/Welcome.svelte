@@ -8,12 +8,32 @@
 	}
 
 	const backgroundImages = [
-		'/zanzibar.jpg',
-		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg',
-		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169557/OKHK5314_qcha2v.jpg',
-		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761169108/DSC_1144_-_Copy_tomfbj.jpg',
-		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761168723/_ADM3854_ys3num.jpg',
-		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291532/DSC_1116_hqnq8r.jpg'
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614968/_ADM3854_rippzc.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614612/olga-budko-hl0W9gS0C6k-unsplash_aekauk.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614621/pexels-robyn-w-2788803-10708652_1_zvrrhx.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614970/_ADM3859_sko2fi.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614619/pexels-keeganjchecks-4995594_kevfxp.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614996/OKHK5314_jdzoux.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614623/rock_restaurant_npf2fi.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614973/_ADM3915_luejrd.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614613/pexels-akos-helgert-82252426-8804731_ni6bve.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614923/DSC_1187_jasvv2.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614921/DSC_1176_cttwcl.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614919/DSC_1174_ujtvbu.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614619/pexels-meddybates-13675821_cjw63d.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614821/DSC_1008_dyqcso.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614916/DSC_1171_ovrrom.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614864/DSC_1215_pevldr.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614618/pexels-dajana-reci-289671698-30125136_lsnlg5.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614914/DSC_1100_bumofs.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614823/DSC_1057_rndror.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614616/pexels-dave-white-826945053-19357947_hu4krx.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614720/CBFN2869_t8u4qo.webp',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614723/DSC_1153_-_Copy_sitvwd.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614820/DSC_0988_ocomix.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614610/massai_uosdgl.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614608/massai_3_omuo9z.jpg',
+		'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614605/jozani_2_xaxj54.jpg'
 	];
 
 	let currentImageIndex = 0;
