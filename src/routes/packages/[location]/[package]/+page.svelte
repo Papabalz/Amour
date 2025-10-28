@@ -2,11 +2,23 @@
 	import { page } from '$app/stores';
 	import * as t from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	$: location = $page.params.location;
 	$: packageName = $page.params.package;
 
 	let currentImageIndex = 0;
+	let imagesLoaded = new Set();
+
+	function preloadImages(images: string[]) {
+		images.forEach(src => {
+			if (!imagesLoaded.has(src)) {
+				const img = new Image();
+				img.onload = () => imagesLoaded.add(src);
+				img.src = src;
+			}
+		});
+	}
 
 	function nextImage() {
 		if (currentPackage?.images) {
@@ -536,6 +548,10 @@
 	$: currentPackage = location && packageName ? packageData[location]?.[packageName] : null;
 	$: locationTitle = location?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
+	$: if (currentPackage?.images) {
+		preloadImages(currentPackage.images);
+	}
+
 	let showVideo = false;
 	let videoLoading = false;
 	let videoElement: HTMLVideoElement;
@@ -576,11 +592,9 @@
 
 	<div class="relative h-96 md:h-[440px] overflow-hidden">
 		<!-- Background Image -->
-		{#key currentImageIndex}
-			<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-700 ease-in-out" 
-				 class:opacity-0={showVideo && !videoLoading}
-				 style="background-image: url('{currentPackage.images[currentImageIndex]}')"></div>
-		{/key}
+		<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-500 ease-in-out bg-gray-200" 
+			 class:opacity-0={showVideo && !videoLoading}
+			 style="background-image: url('{currentPackage.images[currentImageIndex]}')"></div>
 		
 		<!-- Image Navigation Buttons -->
 		{#if currentPackage.images && currentPackage.images.length > 1 && (!showVideo || videoLoading)}

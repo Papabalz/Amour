@@ -13,7 +13,7 @@
 			id: 2,
 			name: 'Nakupenda Sandbank',
 			details: t.nakupenda_details(),
-			picture: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761291980/DSC_1113_zsoo1k.jpg'
+			picture: 'https://res.cloudinary.com/ddsgcceuj/image/upload/v1761614240/pexels-dajana-reci-289671698-30125137_hdqobm.jpg'
 		},
 		{
 			id: 3,
