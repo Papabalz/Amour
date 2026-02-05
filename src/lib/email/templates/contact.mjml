@@ -1,0 +1,39 @@
+<mjml>
+	<mj-body background-color="#f6f7fb">
+		<mj-section padding="24px 0">
+			<mj-column>
+				<mj-text font-size="20px" font-weight="bold" color="#1f2937" align="center">
+					New Contact Form Submission
+				</mj-text>
+				<mj-text font-size="14px" color="#6b7280" align="center">
+					Amour Zanzibar Website
+				</mj-text>
+			</mj-column>
+		</mj-section>
+
+		<mj-section background-color="#ffffff" padding="24px" border-radius="8px">
+			<mj-column>
+				<mj-text font-size="16px" color="#111827">
+					<strong>Name:</strong> {{name}}
+				</mj-text>
+				<mj-text font-size="16px" color="#111827">
+					<strong>Email:</strong> {{email}}
+				</mj-text>
+				<mj-text font-size="16px" color="#111827">
+					<strong>Message:</strong>
+				</mj-text>
+				<mj-text font-size="16px" color="#111827" line-height="24px">
+					{{message}}
+				</mj-text>
+			</mj-column>
+		</mj-section>
+
+		<mj-section padding="16px 0">
+			<mj-column>
+				<mj-text font-size="12px" color="#9ca3af" align="center">
+					This email was generated from the contact form on amourzanzibar.com.
+				</mj-text>
+			</mj-column>
+		</mj-section>
+	</mj-body>
+</mjml>

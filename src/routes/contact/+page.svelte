@@ -1,6 +1,27 @@
 <script lang="ts">
 	import { m as t } from '$lib/paraglide/messages.js';
+	import { enhance } from '$app/forms';
 	let isLoading = $state(false);
+	let successMessage = $state('');
+	let errorMessage = $state('');
+
+	const onEnhance = () => {
+		isLoading = true;
+		successMessage = '';
+		errorMessage = '';
+
+		return async ({ result, update }: { result: any; update: () => Promise<void> }) => {
+			isLoading = false;
+			if (result.type === 'success') {
+				successMessage = result.data?.message || 'Message sent successfully';
+				update();
+			} else if (result.type === 'failure') {
+				errorMessage = result.data?.message || 'Failed to send message';
+			} else if (result.type === 'error') {
+				errorMessage = 'Failed to send message';
+			}
+		};
+	};
 </script>
 
 <div class="container mx-auto p-8">
@@ -12,7 +33,7 @@
 
 		<div class="grid gap-8 md:grid-cols-2">
 			<!-- Contact Form -->
-			<form class="space-y-4" onsubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
+			<form class="space-y-4" method="POST" use:enhance={onEnhance}>
 				<div>
 					<label for="name" class="label">{t.contact_form_name()}</label>
 					<input type="text" id="name" name="name" class="input input-bordered w-full" required />
@@ -25,6 +46,12 @@
 					<label for="message" class="label">{t.contact_form_message()}</label>
 					<textarea id="message" name="message" class="textarea textarea-bordered w-full" rows="5" required></textarea>
 				</div>
+				{#if successMessage}
+					<div class="alert alert-success">{successMessage}</div>
+				{/if}
+				{#if errorMessage}
+					<div class="alert alert-error">{errorMessage}</div>
+				{/if}
 				<button type="submit" class="btn btn-neutral w-full" disabled={isLoading}>
 					{#if isLoading}
 						<span class="loading loading-spinner"></span>
@@ -37,8 +64,8 @@
 			<!-- Contact Info -->
 			<div class="space-y-4 rounded-box bg-base-200 p-6">
 				<h2 class="text-2xl font-bold">{t.contact_info_title()}</h2>
-				<p><strong>{t.contact_info_email()}</strong> <a href="mailto:contact@amour.com" class="link">contact@amour.com</a></p>
-				<p><strong>{t.contact_info_phone()}</strong> <a href="tel:+1234567890" class="link">+1 (234) 567-890</a></p>
+				<p><strong>{t.contact_info_email()}</strong> <a href="mailto:support@amourzanzibar.com" class="link-neutral">support@amourzanzibar.com</a></p>
+				<p><strong>{t.contact_info_phone()}</strong> <a href="tel:+1234567890" class="link-neutral">+1 (234) 567-890</a></p>
 				<p><strong>{t.contact_info_address()}</strong><br />123 Travel Lane<br />Adventure City, World 12345</p>
 			</div>
 		</div>

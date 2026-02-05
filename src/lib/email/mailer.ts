@@ -82,3 +82,36 @@ export async function sendWelcomeEmail(userData: {
     return { success: false, error };
   }
 }
+
+export async function sendContactEmail(contactData: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  try {
+    const mjmlTemplate = fs.readFileSync(
+      path.join(process.cwd(), 'src/lib/email/templates/contact.mjml'),
+      'utf8'
+    );
+
+    let htmlContent = mjmlTemplate
+      .replace(/{{name}}/g, contactData.name)
+      .replace(/{{email}}/g, contactData.email)
+      .replace(/{{message}}/g, contactData.message);
+
+    const { html } = mjml2html(htmlContent);
+
+    await transporter.sendMail({
+      from: process.env.ZOHO_EMAIL,
+      to: 'support@amourzanzibar.com',
+      replyTo: contactData.email,
+      subject: 'New Contact Form Submission - Amour Tours',
+      html
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Contact email sending failed:', error);
+    return { success: false, error };
+  }
+}
