@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
+	import { browser } from '$app/environment';
 	import * as t from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 
-	$: location = $page.params.location;
-	$: packageName = $page.params.package;
+	$: location = page.params.location;
+	$: packageName = page.params.package;
 
 	let currentImageIndex = 0;
 	let imagesLoaded = new Set();
@@ -548,7 +548,7 @@
 	$: currentPackage = location && packageName ? packageData[location]?.[packageName] : null;
 	$: locationTitle = location?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-	$: if (currentPackage?.images) {
+	$: if (browser && currentPackage?.images) {
 		preloadImages(currentPackage.images);
 	}
 

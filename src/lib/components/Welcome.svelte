@@ -39,6 +39,11 @@
 	let currentImageIndex = 0;
 
 	onMount(() => {
+		backgroundImages.forEach((src) => {
+			const img = new Image();
+			img.src = src;
+		});
+
 		const interval = setInterval(() => {
 			currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
 		}, 5000);
